@@ -1,4 +1,4 @@
-package com.android.timeco;
+package com.android.timeco.ViewModel;
 
 import androidx.lifecycle.ViewModel;
 
