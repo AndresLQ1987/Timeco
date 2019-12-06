@@ -26,6 +26,7 @@ public class HomeFragment extends Fragment {
      */
 
     Button btnStaff;
+    Button btnOptions;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,12 +75,23 @@ public class HomeFragment extends Fragment {
 
         //TODO Methods for change other views and method SaveWorklog
         btnStaff = ui_layout.findViewById(R.id.btn_staff);
+        btnOptions = ui_layout.findViewById(R.id.btn_options);
 
+        //ActionListener of button staff to go staff fragment
         btnStaff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
                         R.id.MainActivity, new StaffFragment()).commit();
+            }
+        });
+
+        //ActionListener of button options to go options fragment
+        btnOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(
+                        R.id.MainActivity, new OptionsFragment()).commit();
             }
         });
 

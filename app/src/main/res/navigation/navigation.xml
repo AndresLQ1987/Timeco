@@ -20,4 +20,9 @@
         android:name="com.android.timeco.View.StaffFragment"
         android:label="fragment_staff"
         tools:layout="@layout/fragment_staff" />
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="com.android.timeco.View.OptionsFragment"
+        android:label="fragment_options"
+        tools:layout="@layout/fragment_options" />
 </navigation>
