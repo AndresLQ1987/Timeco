@@ -7,12 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.android.timeco.R;
 
-public class LoginFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -22,14 +20,7 @@ public class LoginFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    /**
-     * Elements of Fragment
-     */
-    EditText et_username;
-    EditText pwd_password;
-    Button loginBtn;
-
-    public LoginFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +30,11 @@ public class LoginFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
+     * @return A new instance of fragment HomeFragment.
      */
 
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,7 +54,7 @@ public class LoginFragment extends Fragment {
     /**
      * Method to get interactions and throw information to View Model
      *
-     * @param inflater layout of fragment
+     * @param inflater
      * @param container
      * @param savedInstanceState
      * @return
@@ -72,33 +63,10 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View ui_layout = inflater.inflate(R.layout.fragment_login, container, false);
+        View ui_layout = inflater.inflate(R.layout.fragment_home, container, false);
 
-        et_username = ui_layout.findViewById(R.id.fld_username);
-        pwd_password = ui_layout.findViewById(R.id.pwd_password);
-        loginBtn = ui_layout.findViewById(R.id.loginButton);
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Check the username and password for login
-                //TODO Connect this with ViewModel
-                if (et_username.getText().toString().equals("u") &&
-                        pwd_password.getText().toString().equals("p")) {
-                    changeToHome();
-                }
-            }
-        });
+        //TODO Methods for change other views and method SaveWorklog
 
         return ui_layout;
     }
-
-    /**
-     * Method tho change to home fragment
-     */
-    private void changeToHome(){
-        getActivity().getSupportFragmentManager().beginTransaction().replace(
-                R.id.MainActivity, new HomeFragment()).commit();
-    }
-
 }
