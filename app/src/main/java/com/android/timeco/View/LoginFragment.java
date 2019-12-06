@@ -86,7 +86,7 @@ public class LoginFragment extends Fragment {
                 if (et_username.getText().toString().equals("u") &&
                         pwd_password.getText().toString().equals("p")) {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(
-                            R.id.MainActivity, new LoginFragment()).commit(); //TODO Change LoginFragment for the correct fragment
+                            R.id.MainActivity, new HomeFragment()).commit();
                 }
             }
         });
