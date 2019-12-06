@@ -85,13 +85,20 @@ public class LoginFragment extends Fragment {
                 //TODO Connect this with ViewModel
                 if (et_username.getText().toString().equals("u") &&
                         pwd_password.getText().toString().equals("p")) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(
-                            R.id.MainActivity, new HomeFragment()).commit();
+                    changeToHome();
                 }
             }
         });
 
         return ui_layout;
+    }
+
+    /**
+     * Method tho change to home fragment
+     */
+    private void changeToHome(){
+        getActivity().getSupportFragmentManager().beginTransaction().replace(
+                R.id.MainActivity, new HomeFragment()).commit();
     }
 
 }
