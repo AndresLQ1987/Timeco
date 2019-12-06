@@ -20,6 +20,14 @@
     <string name="btn_staff">PERSONAL</string>
     <string name="btn_options">OPCIONES</string>
 
+    <!-- Staff Management -->
+    <string name="txt_Staff_Name">Nombre</string>
+    <string name="txt_Staff_Surname">Apellidos</string>
+    <string name="txt_Staff_Username">Usuario</string>
+    <string name="txt_Staff_Position">Cargo</string>
+    <string name="btn_editCancel">Editar</string>
+    <string name="btn_confirmDelete">Confirmar</string>
+
     <!-- Options -->
     <string name="tv_nombre">NOMBRE DE LA EMPRESA</string>
     <string name="etxt_nombre">Escriba un nombre</string>
