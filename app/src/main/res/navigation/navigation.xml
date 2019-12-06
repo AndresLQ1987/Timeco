@@ -25,4 +25,9 @@
         android:name="com.android.timeco.View.OptionsFragment"
         android:label="fragment_options"
         tools:layout="@layout/fragment_options" />
+    <fragment
+        android:id="@+id/worklogsFragment"
+        android:name="com.android.timeco.View.WorklogsFragment"
+        android:label="fragment_worklogs"
+        tools:layout="@layout/fragment_worklogs" />
 </navigation>

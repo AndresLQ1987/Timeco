@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.android.timeco.R;
 
@@ -22,7 +23,7 @@ public class WorklogsFragment extends Fragment {
     /**
      * Elements of Fragment
      */
-
+    private Button btnBack;
 
     public WorklogsFragment() {
         // Required empty public constructor
@@ -61,6 +62,15 @@ public class WorklogsFragment extends Fragment {
         View ui_layout = inflater.inflate(R.layout.fragment_worklogs, container, false);
 
         //TODO Methods gets information to ViewModel
+        btnBack = ui_layout.findViewById(R.id.btn_w_Back);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(
+                        R.id.MainActivity, new HomeFragment()).commit();
+            }
+        });
 
         return ui_layout;
     }
