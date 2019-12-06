@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Timeco</string>
+
+    <string name="tv_Title">TIMECO</string>
+    <string name="tv_username">Usuario</string>
+    <string name="tv_password">Contraseña</string>
+    <string name="btn_button">ENTRAR</string>
+    <string name="tv_inicio">INICIO DE LA JORNADA</string>
+    <string name="number">00</string>
+    <string name="points">:</string>
+    <string name="tv_fin">FINAL DE LA JORNADA</string>
+    <string name="tv_pausa">DESCANSO (OPCIONAL)</string>
+    <string name="button_reg">ACEPTAR</string>
+
+    <string name="registros">VER REGISTROS</string>
+    <string name="gestion">GESTIÓN DE PERSONAL</string>
+    <string name="opciones">OPCIONES</string>
+    <string name="menu_home">MENÚ</string>
+
+    <string name="tv_nombre">NOMBRE DE LA EMPRESA</string>
+    <string name="etxt_nombre">Escriba un nombre</string>
+    <string name="tv_logo">IMAGEN DE LA EMPRESA</string>
+    <string name="img_login">img_login</string>
 </resources>
