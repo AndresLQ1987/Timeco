@@ -1,9 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.LoginFragment" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/LoginBkg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/london"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_Title_Login"
+            android:layout_width="140dp"
+            android:layout_height="49dp"
+            android:text="@string/tv_Title"
+            android:textColor="@android:color/background_dark"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.100" />
+
+        <ImageView
+            android:id="@+id/img_login"
+            android:layout_width="114dp"
+            android:layout_height="121dp"
+            android:contentDescription="@string/img_login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Title_Login"
+            app:layout_constraintVertical_bias="0.06"
+            app:srcCompat="@drawable/logosize"
+            tools:srcCompat="@drawable/logosize" />
+
+        <EditText
+            android:id="@+id/fld_username"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
+            android:background="#85000000"
+            android:hint="@string/tv_username"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_login"
+            app:layout_constraintVertical_bias="0.141" />
+
+        <EditText
+            android:id="@+id/pwd_password"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
+            android:background="#85000000"
+            android:hint="@string/tv_password"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fld_username"
+            app:layout_constraintVertical_bias="0.133" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
+            android:text="@string/btn_button"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pwd_password" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

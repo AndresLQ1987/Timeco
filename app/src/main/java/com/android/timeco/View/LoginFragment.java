@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.timeco.R;
 
@@ -19,6 +21,13 @@ public class LoginFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    /**
+     * Elements of Fragment
+     */
+    EditText et_username;
+    EditText pwd_password;
+    Button loginBtn;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -54,7 +63,7 @@ public class LoginFragment extends Fragment {
     /**
      * Method to get interactions and throw information to View Model
      *
-     * @param inflater
+     * @param inflater layout of fragment
      * @param container
      * @param savedInstanceState
      * @return
@@ -63,8 +72,26 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
-        //TODO here go the interaction whit buttons and save info for send to ViewModel
+        View ui_layout = inflater.inflate(R.layout.fragment_login, container, false);
+
+        et_username = ui_layout.findViewById(R.id.fld_username);
+        pwd_password = ui_layout.findViewById(R.id.pwd_password);
+        loginBtn = ui_layout.findViewById(R.id.loginButton);
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Check the username and password for login
+                //TODO Connect this with ViewModel
+                if (et_username.getText().toString().equals("u") &&
+                        pwd_password.getText().toString().equals("p")) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(
+                            R.id.MainActivity, new LoginFragment()).commit(); //TODO Change LoginFragment for the correct fragment
+                }
+            }
+        });
+
+        return ui_layout;
     }
 
 }
