@@ -15,4 +15,9 @@
         android:name="com.android.timeco.View.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/staffFragment"
+        android:name="com.android.timeco.View.StaffFragment"
+        android:label="fragment_staff"
+        tools:layout="@layout/fragment_staff" />
 </navigation>
