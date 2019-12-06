@@ -25,8 +25,9 @@ public class HomeFragment extends Fragment {
      * Elements of Fragment
      */
 
-    Button btnStaff;
-    Button btnOptions;
+    private Button btnWorklog;
+    private Button btnStaff;
+    private Button btnOptions;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -62,10 +63,10 @@ public class HomeFragment extends Fragment {
     /**
      * Method to get interactions and throw information to View Model
      *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater inflater
+     * @param container container
+     * @param savedInstanceState saveInstanceState
+     * @return View
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,8 +75,18 @@ public class HomeFragment extends Fragment {
         View ui_layout = inflater.inflate(R.layout.fragment_home, container, false);
 
         //TODO Methods for change other views and method SaveWorklog
+        btnWorklog = ui_layout.findViewById(R.id.btn_Worklogs);
         btnStaff = ui_layout.findViewById(R.id.btn_staff);
         btnOptions = ui_layout.findViewById(R.id.btn_options);
+
+        //ActionListener of button Worklogs to go work logs fragment
+        btnWorklog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(
+                        R.id.MainActivity, new WorklogsFragment()).commit();
+            }
+        });
 
         //ActionListener of button staff to go staff fragment
         btnStaff.setOnClickListener(new View.OnClickListener() {

@@ -20,6 +20,13 @@
     <string name="btn_staff">PERSONAL</string>
     <string name="btn_options">OPCIONES</string>
 
+    <!-- Work Logs -->
+    <string name="txtNameSearch">Nombre Empleado</string>
+    <string name="txtDateInit">Fecha inicio</string>
+    <string name="txtDateEnd">Fecha fin</string>
+    <string name="btnSearch">BUSCAR</string>
+    <string name="btnBack">ATRAS</string>
+
     <!-- Staff Management -->
     <string name="txt_Staff_Name">Nombre</string>
     <string name="txt_Staff_Surname">Apellidos</string>
