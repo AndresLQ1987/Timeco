@@ -1,5 +1,6 @@
 package com.android.timeco.Model;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.io.Serializable;
 import java.util.Date;
