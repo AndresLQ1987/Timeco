@@ -23,7 +23,7 @@ public class Worklog {
      * @param dEnd Date work ends
      * @param rTime float
      */
-    Worklog(Date dInit, Date dEnd, float rTime){
+    public Worklog(Date dInit, Date dEnd, float rTime){
         dateInit = dInit;
         dateEnd = dEnd;
         restTime = rTime;
