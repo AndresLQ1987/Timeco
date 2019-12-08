@@ -1,13 +1,12 @@
 package com.android.timeco.Model;
 
+import java.text.DecimalFormat;
+import java.util.Date;
+
 /**
  *  Class Worklog this class is used for save the time as work the user, also save the start and the
  *  end of work time, at last save the time of break time.
  */
-
-import java.text.DecimalFormat;
-import java.util.Date;
-
 public class Worklog {
 
     private Date dateInit;
@@ -15,19 +14,7 @@ public class Worklog {
     private float restTime;
     private float workedTime;
 
-    /**
-     * Builders
-     */
-
-    /**
-     * Basic Builder
-     */
-    Worklog(){
-        dateInit = null;
-        dateEnd = null;
-        restTime = 0;
-        workedTime = 0;
-    }
+    //BUILDER
 
     /**
      * Builder whit save all features and calculate the worked time
@@ -43,9 +30,7 @@ public class Worklog {
         CalculateWorkedTime(dInit,dEnd,rTime);
     }
 
-    /**
-     * Setters
-     */
+    //SETTERS
 
     /**
      * Set the Date work begins
@@ -68,15 +53,13 @@ public class Worklog {
     /**
      * Set the break time
      *
-     * @param restTime
+     * @param restTime float to set the rest time
      */
     public void setRestTime(float restTime) {
         this.restTime = restTime;
     }
 
-    /**
-     * Getters
-     */
+     //GETTERS
 
     /**
      * Get the date when work begins
@@ -114,9 +97,7 @@ public class Worklog {
         return workedTime;
     }
 
-    /**
-     * Methods
-     */
+     // METHODS
 
     /**
      * Calculate the worked time
@@ -125,12 +106,10 @@ public class Worklog {
      * @param dEnd Date work ends
      * @param rTime Float time of break in hours
      */
-    public void CalculateWorkedTime(Date dInit, Date dEnd, float rTime) {
-        float time = 0;
+    private void CalculateWorkedTime(Date dInit, Date dEnd, float rTime) {
         float difTime = (float)(dEnd.getTime() - dInit.getTime());
         float difTimeInHours = difTime / (1000 * 60 * 60);
-        time = difTimeInHours - rTime;
-        workedTime = time;
+        workedTime = difTimeInHours - rTime;
     }
 
     /**
@@ -139,15 +118,13 @@ public class Worklog {
      * HH = hours
      * mm = minutes
      *
-     * @param fHours
+     * @param fHours float of hours to convert
      * @return String whit hours converted
      */
     public String convertIntoHours(float fHours) {
-        String hours = "";
         DecimalFormat fm = new DecimalFormat("00");
         int hour = (int) fHours;
         int minuts = (int) ((fHours - hour) * 60);
-        hours = fm.format(hour) + ":" + fm.format(minuts);
-        return hours;
+        return fm.format(hour) + ":" + fm.format(minuts);
     }
 }
