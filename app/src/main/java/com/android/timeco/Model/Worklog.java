@@ -5,6 +5,7 @@ package com.android.timeco.Model;
  *  end of work time, at last save the time of break time.
  */
 
+import java.text.DecimalFormat;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -131,5 +132,23 @@ public class Worklog implements Serializable {
         float difTimeInHours = difTime / (1000 * 60 * 60);
         time = difTimeInHours - rTime;
         workedTime = time;
+    }
+
+    /**
+     * Convert the float into String whit format HH:mm
+     *
+     * HH = hours
+     * mm = minutes
+     *
+     * @param fHours
+     * @return String whit hours converted
+     */
+    public String convertIntoHours(float fHours) {
+        String hours = "";
+        DecimalFormat fm = new DecimalFormat("00");
+        int hour = (int) fHours;
+        int minuts = (int) ((fHours - hour) * 60);
+        hours = fm.format(hour) + ":" + fm.format(minuts);
+        return hours;
     }
 }
