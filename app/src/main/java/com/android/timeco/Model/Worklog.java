@@ -5,9 +5,10 @@ package com.android.timeco.Model;
  *  end of work time, at last save the time of break time.
  */
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Worklog {
+public class Worklog implements Serializable {
 
     private Date dateInit;
     private Date dateEnd;
@@ -21,7 +22,7 @@ public class Worklog {
     /**
      * Basic Builder
      */
-    Worklog(){
+    public Worklog(){
         dateInit = null;
         dateEnd = null;
         restTime = 0;
@@ -35,7 +36,7 @@ public class Worklog {
      * @param dEnd Date work ends
      * @param rTime float
      */
-    Worklog(Date dInit, Date dEnd, float rTime){
+    public Worklog(Date dInit, Date dEnd, float rTime){
         dateInit = dInit;
         dateEnd = dEnd;
         restTime = rTime;

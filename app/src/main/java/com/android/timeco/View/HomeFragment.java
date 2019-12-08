@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.android.timeco.AccessData;
 import com.android.timeco.R;
+import com.android.timeco.ViewModel.HomeViewModel;
 
 public class HomeFragment extends Fragment {
 
+    private HomeViewModel mViewModel = new HomeViewModel();
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -28,6 +32,14 @@ public class HomeFragment extends Fragment {
     private Button btnWorklog;
     private Button btnStaff;
     private Button btnOptions;
+    private Button btnReg;
+
+    private EditText et_start_hours;
+    private EditText et_start_minuts;
+    private EditText et_end_hours;
+    private EditText et_end_minuts;
+    private EditText et_rest_hours;
+    private EditText et_rest_minuts;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,10 +86,21 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View ui_layout = inflater.inflate(R.layout.fragment_home, container, false);
 
+        et_start_hours = ui_layout.findViewById(R.id.etxt_start_h);
+        et_start_minuts = ui_layout.findViewById(R.id.etxt_start_m);
+        et_end_hours = ui_layout.findViewById(R.id.etxt_end_h);
+        et_end_minuts = ui_layout.findViewById(R.id.etxt_end_m);
+        et_rest_hours = ui_layout.findViewById(R.id.etxt_pause_h);
+        et_rest_minuts = ui_layout.findViewById(R.id.etxt_pause_m);
+
+
+        mViewModel.initiateWorklogFile(getContext());
+
         //TODO Methods for change other views and method SaveWorklog
         btnWorklog = ui_layout.findViewById(R.id.btn_Worklogs);
         btnStaff = ui_layout.findViewById(R.id.btn_staff);
         btnOptions = ui_layout.findViewById(R.id.btn_options);
+        btnReg = ui_layout.findViewById(R.id.button_reg);
 
         //ActionListener of button Worklogs to go work logs fragment
         btnWorklog.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +129,28 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        resetInputs();
+
+        btnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.inputWorklog(et_start_hours.getText().toString(), et_start_minuts.getText().toString(),
+                        et_end_hours.getText().toString(), et_end_minuts .getText().toString(),
+                        et_rest_hours .getText().toString(), et_rest_minuts.getText().toString());
+
+                resetInputs();
+            }
+        });
+
         return ui_layout;
+    }
+
+    private void resetInputs(){
+        et_start_hours.setText("0");
+        et_start_minuts.setText("0");
+        et_end_hours.setText("0");
+        et_end_minuts.setText("0");
+        et_rest_hours.setText("0");
+        et_rest_minuts.setText("0");
     }
 }

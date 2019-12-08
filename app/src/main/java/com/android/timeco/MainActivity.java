@@ -3,6 +3,7 @@ package com.android.timeco;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.android.timeco.Model.User;
@@ -13,6 +14,7 @@ import com.android.timeco.View.LoginFragment;
  */
 public class MainActivity extends AppCompatActivity {
 
+    final String FILE_NAME = "Users.bin";
     FragmentManager fm;
     AccessData accessData;
     static public User currentUser;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         accessData = AccessData.get();
-        accessData.initializeFiles(this);
+        accessData.initializeFile(this, FILE_NAME);
 
         // Draw the first fragment
         fm = getSupportFragmentManager();
