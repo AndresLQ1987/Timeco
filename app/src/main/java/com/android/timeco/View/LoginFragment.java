@@ -11,9 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.timeco.R;
+import com.android.timeco.ViewModel.LoginViewModel;
 
 public class LoginFragment extends Fragment {
 
+    private LoginViewModel mViewModel = new LoginViewModel();
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -82,9 +84,10 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Check the username and password for login
-                //TODO Connect this with ViewModel
-                if (et_username.getText().toString().equals("u") &&
-                        pwd_password.getText().toString().equals("p")) {
+                String inputUser = et_username.getText().toString();
+                String inputPass = pwd_password.getText().toString();
+
+                if (mViewModel.checkCredentials(inputUser, inputPass)) {
                     changeToHome();
                 }
             }
