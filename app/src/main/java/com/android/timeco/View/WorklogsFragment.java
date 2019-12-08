@@ -120,7 +120,8 @@ public class WorklogsFragment extends Fragment {
 
             holder.initDate.setText(worklog.getDateInit().toString());
             holder.endDate.setText(worklog.getDateEnd().toString());
-
+            holder.breakHours.setText(worklog.convertIntoHours(worklog.getRestTime()));
+            holder.totalHours.setText(worklog.convertIntoHours(worklog.getWorkedTime()));
         }
 
         @Override
