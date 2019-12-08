@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
+import com.android.timeco.Model.User;
 import com.android.timeco.View.LoginFragment;
 
 /**
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     FragmentManager fm;
     AccessData accessData;
+    static public User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

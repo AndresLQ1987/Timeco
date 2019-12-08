@@ -3,6 +3,7 @@ package com.android.timeco.ViewModel;
 import androidx.lifecycle.ViewModel;
 
 import com.android.timeco.AccessData;
+import com.android.timeco.MainActivity;
 import com.android.timeco.Model.User;
 
 import java.util.ArrayList;
@@ -26,8 +27,10 @@ public class LoginViewModel extends ViewModel {
         if(username.equals("") && password.equals("")) return true;
         for (User user: userList
              ) {
-            if(checkUser(user, username, password))
+            if(checkUser(user, username, password)){
+                MainActivity.currentUser = user;
                 return true;
+            }
         }
         return false;
     }
