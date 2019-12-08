@@ -7,10 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.timeco.R;
+import com.android.timeco.ViewModel.StaffViewModel;
 
 public class StaffFragment extends Fragment {
+
+    private StaffViewModel mViewModel = new StaffViewModel();
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -19,6 +24,18 @@ public class StaffFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    //Elements of the fragment;
+    private EditText et_name;
+    private EditText et_surname;
+    private EditText et_position;
+    private EditText et_username;
+    private EditText et_password;
+    //private Selector? role;
+    //private Selector? mode?;
+    private Button bt_confirm;
+
+
 
     public StaffFragment() {
         // Required empty public constructor
@@ -64,6 +81,28 @@ public class StaffFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View ui_layout = inflater.inflate(R.layout.fragment_staff, container, false);
+
+        et_name = ui_layout.findViewById(R.id.txt_Staff_Name);
+        et_surname = ui_layout.findViewById(R.id.txt_Staff_Surname);
+        et_position = ui_layout.findViewById(R.id.txt_Staff_Position);
+        et_username = ui_layout.findViewById(R.id.txt_Staff_Username);
+        et_password = ui_layout.findViewById(R.id.txt_Staff_Password);
+        //TODO Rename id button to btn_confirm
+        bt_confirm = ui_layout.findViewById(R.id.btn_confirmDelete);
+
+        bt_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mViewModel.enterUser(et_name.getText().toString(),
+                        et_surname.getText().toString(),
+                        et_position.getText().toString(),
+                        et_username.getText().toString(),
+                        et_password.getText().toString()))
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(
+                            R.id.MainActivity, new HomeFragment()).commit();
+
+            }
+        });
 
         //TODO get the information in fragment and sent to ViewModel StaffViewModel
 

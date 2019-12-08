@@ -1,10 +1,12 @@
 package com.android.timeco.Model;
 
+import java.io.Serializable;
+
 /**
  *  User Class define the features and methods of Users
  */
 
-public class User {
+public class User implements Serializable {
 
     private enum Rol{
         owner,
@@ -24,7 +26,7 @@ public class User {
     /**
      * Basic Builder
      */
-    User(){
+    public User(){
         username = null;
         password = null;
         fullname = null;
@@ -41,7 +43,7 @@ public class User {
      * @param lastsurn String whit last surname of User
      * @param rol Int Define the rol of user (1=owner, 2=admin, 3=basic)
      */
-    User(String usern, String pwd, String name, String firstsurn, String lastsurn, int rol){
+    public User(String usern, String pwd, String name, String firstsurn, String lastsurn, int rol){
         username = usern;
         password = pwd;
         fullname = name + " " + firstsurn + " " + lastsurn;

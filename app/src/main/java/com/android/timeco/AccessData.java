@@ -1,5 +1,7 @@
 package com.android.timeco;
 
+import android.content.Context;
+
 import com.android.timeco.Model.User;
 import com.android.timeco.Model.Worklog;
 
@@ -11,10 +13,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AccessData {
 
-    private File UsersFile = new File("Users.bin");
+    private Context c;
+    private File UsersFile;
 
     /**
      * Singleton
@@ -27,10 +31,56 @@ public class AccessData {
     private AccessData (){}
 
     public static AccessData get() {
+
         if (accessdata == null) {
             accessdata = new AccessData();
         }
         return accessdata;
+    }
+
+    public void initializeFiles(Context context){
+        c = context;
+        UsersFile = new File(c.getFilesDir(),"Users.bin");
+
+        try{
+            //System.out.println(c.getFilesDir().getAbsolutePath());
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(c.getFilesDir().getPath() + "/Users.bin"));
+        }
+        catch (FileNotFoundException e){
+            try {
+                File UsersFile = new File(c.getFilesDir(), "Users.bin");
+                UsersFile.createNewFile();
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(!fileExists()) {
+            User user = new User("username", "password", "Francisco", "Timeco", "Lozano", 3);
+            ArrayList<User> newList = new ArrayList<>();
+            newList.add(user);
+            saveUsers(newList);
+            System.out.println("Made the new file");
+        }
+    }
+
+    private boolean fileExists(){
+        try{
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(UsersFile));
+            List<User> Users =  (ArrayList<User>) ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+        return true;
     }
 
     /**

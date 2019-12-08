@@ -31,6 +31,7 @@
     <string name="txt_Staff_Name">Nombre</string>
     <string name="txt_Staff_Surname">Apellidos</string>
     <string name="txt_Staff_Username">Usuario</string>
+    <string name="txt_Staff_Password">Contraseña</string>
     <string name="txt_Staff_Position">Cargo</string>
     <string name="btn_editCancel">Editar</string>
     <string name="btn_confirmDelete">Confirmar</string>

@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        accessData = AccessData.get();
+        accessData.initializeFiles(this);
+
         // Draw the first fragment
         fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.MainActivity, new LoginFragment()).commit();
