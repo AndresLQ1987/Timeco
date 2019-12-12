@@ -219,7 +219,7 @@
         android:id="@+id/bkg_nav_home"
         android:layout_width="0dp"
         android:layout_height="99dp"
-        android:background="@color/bkg_nav_home_color"
+        android:background="#87040000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
