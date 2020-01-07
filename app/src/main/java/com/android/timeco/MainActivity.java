@@ -3,11 +3,11 @@ package com.android.timeco;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import com.android.timeco.Model.User;
 import com.android.timeco.View.LoginFragment;
+import com.android.timeco.View.WebFragment;
 
 /**
  * Main Activity where the fragments are drawn
@@ -29,6 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Draw the first fragment
         fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.MainActivity, new LoginFragment()).commit();
+        fm.beginTransaction().replace(R.id.MainActivity, new WebFragment()).commit();
     }
 }

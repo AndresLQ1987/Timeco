@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.timeco.R;
 
@@ -23,6 +25,7 @@ public class WebFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
 
 
     /**
@@ -61,6 +64,7 @@ public class WebFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -85,8 +89,10 @@ public class WebFragment extends Fragment {
         button_cargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Cargando la URL", Toast.LENGTH_LONG).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
                         R.id.MainActivity, new ViewWebFragment()).commit();
+
             }
         });
 
