@@ -1,6 +1,9 @@
 package com.android.timeco;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import com.android.timeco.Model.User;
 import com.android.timeco.Model.Worklog;
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AccessData {
+public class AccessData extends SQLiteOpenHelper {
 
     private Context c;
     private File UsersFile;
@@ -30,12 +33,14 @@ public class AccessData {
     /**
      * Basic Builder
      */
-    private AccessData (){}
+    private AccessData (Context ctx, String name, SQLiteDatabase.CursorFactory factory, int version){
+        super(ctx, name, factory, version);
+    }
 
-    public static AccessData get() {
+    public static AccessData get(Context ctx, String name, SQLiteDatabase.CursorFactory factory, int version) {
 
         if (accessdata == null) {
-            accessdata = new AccessData();
+            accessdata = new AccessData(ctx, name, factory, version);
         }
         return accessdata;
     }
@@ -208,4 +213,30 @@ public class AccessData {
         return wlogs;
     }
 
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS Users (" +
+                "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "Username TEXT NOT NULL," +
+                "Password TEXT NOT NULL," +
+                "FullName TEXT NOT NULL," +
+                "Rol TEXT)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS Worklogs (" +
+                "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "Username TEXT NOT NULL," +
+                "DateInit TEXT NOT NULL," +
+                "DateEnd TEXT NOT NULL," +
+                "RestTime FLOAT DEFAULT 0)");
+
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Users", null);
+        if(cursor.getString(0).equals("0")){
+            db.execSQL("INSERT INTO Users (Username, Password, Fullname, Rol) VALUES ('user', 'pass', 'USERNAME ADMIN', 'owner')");
+        }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
 }
