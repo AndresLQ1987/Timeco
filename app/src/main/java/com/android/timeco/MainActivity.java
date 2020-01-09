@@ -3,6 +3,7 @@ package com.android.timeco;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.android.timeco.Model.User;
@@ -29,6 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Draw the first fragment
         fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.MainActivity, new WebFragment()).commit();
+        fm.beginTransaction().replace(R.id.MainActivity, new LoginFragment()).commit();
     }
 }

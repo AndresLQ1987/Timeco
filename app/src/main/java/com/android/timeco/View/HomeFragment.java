@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
-import com.android.timeco.AccessData;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.HomeViewModel;
 
@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
     private Button btnStaff;
     private Button btnOptions;
     private Button btnReg;
+    private ImageButton logo;
 
     private EditText et_start_hours;
     private EditText et_start_minuts;
@@ -101,6 +102,7 @@ public class HomeFragment extends Fragment {
         btnStaff = ui_layout.findViewById(R.id.btn_staff);
         btnOptions = ui_layout.findViewById(R.id.btn_options);
         btnReg = ui_layout.findViewById(R.id.button_reg);
+        logo = ui_layout.findViewById(R.id.TIMECO);
 
         //ActionListener of button Worklogs to go work logs fragment
         btnWorklog.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +128,15 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
                         R.id.MainActivity, new OptionsFragment()).commit();
+            }
+        });
+
+        //ActionListener of button TIMECO to go view_web fragment
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(
+                        R.id.MainActivity, new WebFragment()).commit();
             }
         });
 

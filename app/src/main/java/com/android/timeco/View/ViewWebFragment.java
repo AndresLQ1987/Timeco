@@ -74,9 +74,10 @@ public class ViewWebFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            //Aqui no hago nada porque utilizo LiveData
-            //Sin usar LiveData aquí podría definir que hago con la respuesta del Thread
         }
+
     }
 
+
 }
+
