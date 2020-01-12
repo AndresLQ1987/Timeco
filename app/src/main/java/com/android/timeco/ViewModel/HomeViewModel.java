@@ -1,15 +1,10 @@
 package com.android.timeco.ViewModel;
 
-import android.content.Context;
-
 import androidx.lifecycle.ViewModel;
 
-import com.android.timeco.AccessData;
 import com.android.timeco.MainActivity;
-import com.android.timeco.Model.User;
 import com.android.timeco.Model.Worklog;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -19,14 +14,6 @@ import java.util.TimeZone;
  */
 public class HomeViewModel extends ViewModel {
 
-    AccessData ad = AccessData.get();
-
-    public void initiateWorklogFile(Context context){
-        User user = MainActivity.currentUser;
-        AccessData ad = AccessData.get();
-        ad.initializeWorklogsFile(context, user.getUsername() + ".bin");
-    }
-
     public void inputWorklog(String startHours, String startMinutes, String endHours,
                              String endMinutes, String restHours, String restMinutes){
 
@@ -35,11 +22,8 @@ public class HomeViewModel extends ViewModel {
         float restTime = formatInputToFloat(restHours, restMinutes);
 
         Worklog worklog = new Worklog(dateInit, dateEnd, restTime);
-        User user = MainActivity.currentUser;
 
-        ArrayList<Worklog> worklogsList = ad.getWorklogs(user);
-        worklogsList.add(worklog);
-        ad.saveWorklogs(user, worklogsList);
+        MainActivity.accessData.saveWorklogs(MainActivity.currentUser, worklog);
     }
 
     private Date getDateFromInputs(String hours, String minutes){
