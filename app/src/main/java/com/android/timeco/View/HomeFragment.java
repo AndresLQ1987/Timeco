@@ -93,10 +93,6 @@ public class HomeFragment extends Fragment {
         et_rest_hours = ui_layout.findViewById(R.id.etxt_pause_h);
         et_rest_minuts = ui_layout.findViewById(R.id.etxt_pause_m);
 
-
-        mViewModel.initiateWorklogFile(getContext());
-
-        //TODO Methods for change other views and method SaveWorklog
         btnWorklog = ui_layout.findViewById(R.id.btn_Worklogs);
         btnStaff = ui_layout.findViewById(R.id.btn_staff);
         btnOptions = ui_layout.findViewById(R.id.btn_options);
