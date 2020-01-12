@@ -21,14 +21,13 @@ public class LoginViewModel extends ViewModel {
      */
     public boolean checkCredentials(String username, String password){
         ArrayList<User> userList = MainActivity.accessData.getUsers();
-
-        for (User user: userList
-             ) {
-            if(checkUser(user, username, password)){
+        for (User user : userList) {
+            if (checkUser(user, username, password)) {
                 MainActivity.currentUser = user;
                 return true;
             }
         }
+        MainActivity.accessData.insertAdmin();
         return false;
     }
     //TODO cypher passwords
