@@ -30,7 +30,6 @@ public class AccessData extends SQLiteOpenHelper {
     public void saveUsers(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues newUser =  new ContentValues();
-        newUser.put("ID",0);
         newUser.put("Username",user.getUsername());
         newUser.put("Password", user.getPassword());
         newUser.put("FullName",user.getFullname());
@@ -45,15 +44,18 @@ public class AccessData extends SQLiteOpenHelper {
      * @return ArrayList<User>
      */
     public ArrayList<User> getUsers(){
-        ArrayList<User> wusers = null;
+        ArrayList<User> wusers = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor fila = db.rawQuery("SELECT Username, Password, FullName, Rol FROM Users",null);
-        do {
-            User readUser = new User(fila.getString(0), fila.getString(1),
-                                    fila.getString(2), fila.getString(4));
-            wusers.add(readUser);
-            fila.moveToNext();
-        } while (!fila.isLast());
+        if (fila.moveToFirst()) {
+            for (int i = 0; i < fila.getCount(); i++) {
+                fila.moveToPosition(i);
+                User readUser = new User(fila.getString(0), fila.getString(1),
+                        fila.getString(2), fila.getString(3));
+                wusers.add(readUser);
+            }
+        }
+        db.close();
         return wusers;
     }
 
@@ -66,7 +68,6 @@ public class AccessData extends SQLiteOpenHelper {
     public void saveWorklogs(User user,Worklog worklog){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues newWorklog =  new ContentValues();
-        newWorklog.put("ID",0);
         newWorklog.put("Username", user.getUsername());
         newWorklog.put("DateInit", worklog.getDateInit().toString());
         newWorklog.put("DateEnd", worklog.getDateEnd().toString());
@@ -82,24 +83,45 @@ public class AccessData extends SQLiteOpenHelper {
      * @return ArrayList<Worklog> with all work logs
      */
     public ArrayList<Worklog> getWorklogs(User user){
-        ArrayList<Worklog> wlogs = null;
+        ArrayList<Worklog> wlogs = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor fila = db.rawQuery("SELECT Username, DateInit, DateEnd, RestTime FROM Worklogs " +
                         "WHERE Username = '" + user.getUsername() + "'",null);
-        do {
-            Date dInit = null;
-            Date dEnd = null;
-            try{
-                dInit = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(1));
-                dEnd = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(2));
-            } catch( Exception e){
-                e.printStackTrace();
+        if (fila.moveToFirst()) {
+            for (int i = 0; i < fila.getCount(); i++) {
+                fila.moveToPosition(i);
+                Date dInit = new Date();
+                Date dEnd = new Date();
+                try {
+                    dInit = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(1));
+                    dEnd = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(2));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Worklog log = new Worklog(dInit, dEnd, fila.getFloat(3));
+                wlogs.add(log);
             }
-            Worklog log = new Worklog(dInit, dEnd, fila.getFloat(3));
-            wlogs.add(log);
-            fila.moveToNext();
-        } while (!fila.isLast());
+        }
+        db.close();
         return wlogs;
+    }
+
+    public void insertAdmin(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE Username = 'user' AND " +
+                "Password = 'pass' AND Rol = 'owner'", null);
+        if (!cursor.moveToFirst()) {
+            User admin = new User("user", "pass", "Admin User Fullname", "owner");
+            saveUsers(admin);
+        }
+        db.close();
+    }
+
+    public void deleteUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("Users","Username = '" + user.getUsername() + "'",null);
+        db.close();
     }
 
     @Override
@@ -117,11 +139,6 @@ public class AccessData extends SQLiteOpenHelper {
                 "DateInit TEXT NOT NULL," +
                 "DateEnd TEXT NOT NULL," +
                 "RestTime FLOAT DEFAULT 0)");
-
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Users", null);
-        if(cursor.getString(0).equals("0")){
-            db.execSQL("INSERT INTO Users (Username, Password, Fullname, Rol) VALUES ('user', 'pass', 'USERNAME ADMIN', 'owner')");
-        }
     }
 
     @Override
