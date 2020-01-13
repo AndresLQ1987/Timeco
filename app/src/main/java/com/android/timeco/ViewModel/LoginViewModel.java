@@ -13,8 +13,6 @@ import java.util.ArrayList;
  */
 public class LoginViewModel extends ViewModel {
 
-    AccessData ad = AccessData.get();
-
     /**
      * Returns true if the user and his password match with the Users.bin File
      * @param username
@@ -22,16 +20,14 @@ public class LoginViewModel extends ViewModel {
      * @return
      */
     public boolean checkCredentials(String username, String password){
-        ArrayList<User> userList = ad.getUsers();
-
-        if(username.equals("") && password.equals("")) return true;
-        for (User user: userList
-             ) {
-            if(checkUser(user, username, password)){
+        ArrayList<User> userList = MainActivity.accessData.getUsers();
+        for (User user : userList) {
+            if (checkUser(user, username, password)) {
                 MainActivity.currentUser = user;
                 return true;
             }
         }
+        MainActivity.accessData.insertAdmin();
         return false;
     }
     //TODO cypher passwords

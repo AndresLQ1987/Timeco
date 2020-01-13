@@ -1,103 +1,41 @@
 package com.android.timeco;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import com.android.timeco.Model.User;
 import com.android.timeco.Model.Worklog;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class AccessData {
-
-    private Context c;
-    private File UsersFile;
-    private File WorklogsFile;
-
-    /**
-     * Singleton
-     */
-    private static AccessData accessdata;
+public class AccessData extends SQLiteOpenHelper {
 
     /**
      * Basic Builder
      */
-    private AccessData (){}
-
-    public static AccessData get() {
-
-        if (accessdata == null) {
-            accessdata = new AccessData();
-        }
-        return accessdata;
-    }
-
-    public void initializeFile(Context context, String fileName){
-        c = context;
-        UsersFile = new File(c.getFilesDir(), fileName);
-
-        try{
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(c.getFilesDir().getPath() + "/" + fileName));
-        }
-        catch (FileNotFoundException e){
-            try {
-                File UsersFile = new File(c.getFilesDir(), fileName);
-                UsersFile.createNewFile();
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(!fileExists()) {
-            User user = new User();
-            ArrayList<User> newList = new ArrayList<>();
-            newList.add(user);
-            saveUsers(newList);
-        }
-    }
-
-    private boolean fileExists(){
-        try{
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(UsersFile));
-            List<User> Users =  (ArrayList<User>) ois.readObject();
-            ois.close();
-        } catch (FileNotFoundException e) {
-            return false;
-        } catch (IOException e) {
-            return false;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-        return true;
+    public AccessData (Context ctx, String name, SQLiteDatabase.CursorFactory factory, int version){
+        super(ctx, name, factory, version);
     }
 
     /**
-     * Method for save users into file of users
+     * Method for save user into SQLite
      *
-     * @param users Object User
+     * @param user Object User
      */
-    public void saveUsers(ArrayList<User> users){
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(UsersFile));
-            oos.writeObject(users);
-            oos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveUsers(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues newUser =  new ContentValues();
+        newUser.put("Username",user.getUsername());
+        newUser.put("Password", user.getPassword());
+        newUser.put("FullName",user.getFullname());
+        newUser.put("Rol",String.valueOf(user.getRol()));
+        db.insert("Users", null,newUser);
+        db.close();
     }
 
     /**
@@ -106,84 +44,36 @@ public class AccessData {
      * @return ArrayList<User>
      */
     public ArrayList<User> getUsers(){
-        ArrayList<User> Users = null;
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(UsersFile));
-            Users =  (ArrayList<User>) ois.readObject();
-            ois.close();
-        }  catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return Users;
-    }
-
-
-
-    public void initializeWorklogsFile(Context context, String fileName){
-        c = context;
-        WorklogsFile = new File(c.getFilesDir(), fileName);
-
-        try{
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(c.getFilesDir().getPath() + "/" + fileName));
-        }
-        catch (FileNotFoundException e){
-            try {
-                File worklogsFile = new File(c.getFilesDir(), fileName);
-                worklogsFile.createNewFile();
+        ArrayList<User> wusers = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor fila = db.rawQuery("SELECT Username, Password, FullName, Rol FROM Users",null);
+        if (fila.moveToFirst()) {
+            for (int i = 0; i < fila.getCount(); i++) {
+                fila.moveToPosition(i);
+                User readUser = new User(fila.getString(0), fila.getString(1),
+                        fila.getString(2), fila.getString(3));
+                wusers.add(readUser);
             }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-        if(!wFileExists()) {
-            Worklog worklog = new Worklog(new Date(), new Date(), 0);
-            ArrayList<Worklog> newList = new ArrayList<>();
-            newList.add(worklog);
-            saveWorklogs(MainActivity.currentUser, newList);
-        }
+        db.close();
+        return wusers;
     }
-
-    private boolean wFileExists(){
-        try{
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(WorklogsFile));
-            List<Worklog> worklogs =  (ArrayList<Worklog>) ois.readObject();
-            ois.close();
-        } catch (FileNotFoundException e) {
-            return false;
-        } catch (IOException e) {
-            return false;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-        return true;
-    }
-
-
 
     /**
      * Method for save the work log of user
      *
      * @param user User receives the work log
-     * @param worklogs ArrayList<Worklog> Array list whit all work logs
+     * @param worklog ArrayList<Worklog> Array list whit all work logs
      */
-    public void saveWorklogs(User user,ArrayList<Worklog> worklogs){
-        try {
-            ObjectOutputStream  oos = new ObjectOutputStream(new FileOutputStream(WorklogsFile));
-            oos.writeObject(worklogs);
-            oos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveWorklogs(User user,Worklog worklog){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues newWorklog =  new ContentValues();
+        newWorklog.put("Username", user.getUsername());
+        newWorklog.put("DateInit", worklog.getDateInit().toString());
+        newWorklog.put("DateEnd", worklog.getDateEnd().toString());
+        newWorklog.put("RestTime", worklog.getRestTime());
+        db.insert("Worklogs", null,newWorklog);
+        db.close();
     }
 
     /**
@@ -193,19 +83,66 @@ public class AccessData {
      * @return ArrayList<Worklog> with all work logs
      */
     public ArrayList<Worklog> getWorklogs(User user){
-        ArrayList<Worklog> wlogs = null;
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(WorklogsFile));
-            wlogs =  (ArrayList<Worklog>) ois.readObject();
-            ois.close();
-        }  catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        ArrayList<Worklog> wlogs = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor fila = db.rawQuery("SELECT Username, DateInit, DateEnd, RestTime FROM Worklogs " +
+                        "WHERE Username = '" + user.getUsername() + "'",null);
+        if (fila.moveToFirst()) {
+            for (int i = 0; i < fila.getCount(); i++) {
+                fila.moveToPosition(i);
+                Date dInit = new Date();
+                Date dEnd = new Date();
+                try {
+                    dInit = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(1));
+                    dEnd = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(2));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Worklog log = new Worklog(dInit, dEnd, fila.getFloat(3));
+                wlogs.add(log);
+            }
         }
+        db.close();
         return wlogs;
     }
 
+    public void insertAdmin(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE Username = 'user' AND " +
+                "Password = 'pass' AND Rol = 'owner'", null);
+        if (!cursor.moveToFirst()) {
+            User admin = new User("user", "pass", "Admin User Fullname", "owner");
+            saveUsers(admin);
+        }
+        db.close();
+    }
+
+    public void deleteUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("Users","Username = '" + user.getUsername() + "'",null);
+        db.close();
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS Users (" +
+                "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "Username TEXT NOT NULL," +
+                "Password TEXT NOT NULL," +
+                "FullName TEXT NOT NULL," +
+                "Rol TEXT)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS Worklogs (" +
+                "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "Username TEXT NOT NULL," +
+                "DateInit TEXT NOT NULL," +
+                "DateEnd TEXT NOT NULL," +
+                "RestTime FLOAT DEFAULT 0)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
 }
