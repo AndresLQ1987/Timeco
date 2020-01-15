@@ -50,6 +50,13 @@ public class User implements Serializable {
         setRol(rol);
     }
 
+    public User(String usern, String pwd, String fulln, String rol){
+        username = usern;
+        password = pwd;
+        fullname = fulln;
+        setRolWhitString(rol);
+    }
+
     /**
      * Setters
      */
@@ -107,6 +114,16 @@ public class User implements Serializable {
 
             default:
                 break;
+        }
+    }
+
+    public void setRolWhitString(String rol) {
+        if (rol.equalsIgnoreCase("owner")) {
+            this.rol = Rol.owner;
+        } else if (rol.equalsIgnoreCase("admin")) {
+            this.rol = Rol.admin;
+        } else if (rol.equalsIgnoreCase("basic")) {
+            this.rol = Rol.basic;
         }
     }
 

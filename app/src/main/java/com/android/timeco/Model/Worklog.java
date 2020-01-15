@@ -124,8 +124,8 @@ public class Worklog implements Serializable {
      */
     public String convertIntoHours(float fHours) {
         DecimalFormat fm = new DecimalFormat("00");
-        int hour = (int) fHours;
-        int minuts = (int) ((fHours - hour) * 60);
-        return fm.format(hour) + ":" + fm.format(minuts);
+        int hours = (int) fHours;
+        int minutes = (int) ((fHours - hours) * 60);
+        return fm.format(hours) + ":" + fm.format(minutes);
     }
 }

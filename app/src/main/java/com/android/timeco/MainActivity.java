@@ -3,7 +3,6 @@ package com.android.timeco;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import com.android.timeco.Model.User;
@@ -16,16 +15,16 @@ public class MainActivity extends AppCompatActivity {
 
     final String FILE_NAME = "Users.bin";
     FragmentManager fm;
-    AccessData accessData;
+    static public AccessData accessData;
     static public User currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        accessData = AccessData.get();
-        accessData.initializeFile(this, FILE_NAME);
+        accessData = new AccessData(this, "DataBaseTimeco", null, 1);
 
         // Draw the first fragment
         fm = getSupportFragmentManager();

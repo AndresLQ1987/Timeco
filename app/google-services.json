@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "312770955105",
+    "firebase_url": "https://timeco-3fafd.firebaseio.com",
+    "project_id": "timeco-3fafd",
+    "storage_bucket": "timeco-3fafd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312770955105:android:c1332689ace4c29e0e6720",
+        "android_client_info": {
+          "package_name": "com.android.timeco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312770955105-doua8gbm1cqb9ql7kshjjiivami97asq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.timeco",
+            "certificate_hash": "4057ab32074989767faee3e7000130b783293739"
+          }
+        },
+        {
+          "client_id": "312770955105-eufvbpr2cqvhar7inntvk0kjpa0vpear.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBqhGKpgs4HoFtha7MTHBi7jHGUx4GdV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312770955105-eufvbpr2cqvhar7inntvk0kjpa0vpear.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
