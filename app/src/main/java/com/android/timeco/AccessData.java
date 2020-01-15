@@ -12,6 +12,7 @@ import com.android.timeco.Model.Worklog;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class AccessData extends SQLiteOpenHelper {
 
@@ -65,7 +66,7 @@ public class AccessData extends SQLiteOpenHelper {
      * @param user User receives the work log
      * @param worklog ArrayList<Worklog> Array list whit all work logs
      */
-    public void saveWorklogs(User user,Worklog worklog){
+    public void saveWorklogs(User user, Worklog worklog){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues newWorklog =  new ContentValues();
         newWorklog.put("Username", user.getUsername());
@@ -90,16 +91,14 @@ public class AccessData extends SQLiteOpenHelper {
         if (fila.moveToFirst()) {
             for (int i = 0; i < fila.getCount(); i++) {
                 fila.moveToPosition(i);
-                Date dInit = new Date();
-                Date dEnd = new Date();
                 try {
-                    dInit = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(1));
-                    dEnd = new SimpleDateFormat("dd/MM/yyyy").parse(fila.getString(2));
+                    Date dateInit = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH).parse(fila.getString(1));
+                    Date dateEnd = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH).parse(fila.getString(2));
+                    Worklog log = new Worklog(dateInit, dateEnd, fila.getFloat(3));
+                    wlogs.add(log);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Worklog log = new Worklog(dInit, dEnd, fila.getFloat(3));
-                wlogs.add(log);
             }
         }
         db.close();

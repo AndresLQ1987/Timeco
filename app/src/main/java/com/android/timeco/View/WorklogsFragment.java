@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.timeco.MainActivity;
 import com.android.timeco.Model.Worklog;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.WorklogsViewModel;
@@ -78,7 +79,7 @@ public class WorklogsFragment extends Fragment {
         btnBack = ui_layout.findViewById(R.id.btn_w_Back);
 
         rv_worklogs.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ArrayList<Worklog> listWorklogs = worklogsViewModel.getWorklogs();
+        ArrayList<Worklog> listWorklogs = worklogsViewModel.getWorklogs(MainActivity.currentUser);
         RecyclerAdapterWorklogs adapterWorklogs = new RecyclerAdapterWorklogs(listWorklogs);
         rv_worklogs.setAdapter(adapterWorklogs);
 

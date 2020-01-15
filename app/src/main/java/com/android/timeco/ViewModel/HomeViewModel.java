@@ -33,7 +33,7 @@ public class HomeViewModel extends ViewModel {
 
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
         cal.setTime(now);
-        int year = cal.get(Calendar.YEAR);
+        int year = cal.get(Calendar.YEAR) - 1900; //The constructor adds 1900 to the year
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
