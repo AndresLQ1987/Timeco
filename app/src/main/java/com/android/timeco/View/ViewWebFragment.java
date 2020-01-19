@@ -83,10 +83,10 @@ public class ViewWebFragment extends Fragment {
 
         web = ui_layout.findViewById(R.id.web);
 
-        url_austria = austria.getText().toString();
+       // url_austria = austria.getText().toString();
 
-        MiHilo hilo = new MiHilo();
-        hilo.execute("https://agora.xtec.cat/insjoandaustria/");
+        //MiHilo hilo = new MiHilo();
+       // hilo.execute("https://agora.xtec.cat/insjoandaustria/");
 
        /* btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +95,10 @@ public class ViewWebFragment extends Fragment {
             }
         });*/
 
-}
+//}
 
 
-    public class MiHilo extends AsyncTask<String,Void,String>{
+   /* public class MiHilo extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
@@ -155,8 +155,8 @@ public class ViewWebFragment extends Fragment {
             }*/
 
 
-        }
-    }
+       // }
+   // }
 
         return ui_layout;
     }
