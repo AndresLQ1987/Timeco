@@ -54,6 +54,7 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
+        android:gravity="top"
         android:hint="Escriba su incidencia"
         android:inputType="textPersonName"
         android:singleLine="false"
