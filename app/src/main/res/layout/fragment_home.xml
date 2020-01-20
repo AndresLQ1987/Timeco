@@ -207,7 +207,7 @@
         android:id="@+id/button_reg"
         android:layout_width="157dp"
         android:layout_height="64dp"
-        android:background="@drawable/round_button"
+        android:background="@android:color/holo_orange_light"
         android:text="@string/button_reg"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
