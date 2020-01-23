@@ -41,6 +41,14 @@ public class WriteIncidentFragment extends Fragment {
                 }
             }
         });
+        /*back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (writeIncidents.getText().toString() != null) {
+                    writeIncidentViewModel.WriteOnFirebase(writeIncidents.getText().toString());
+                }
+            }
+        });*/
 
         return root;
     }
