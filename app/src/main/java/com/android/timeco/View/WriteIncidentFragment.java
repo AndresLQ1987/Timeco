@@ -32,7 +32,7 @@ public class WriteIncidentFragment extends Fragment {
 
         final EditText writeIncidents = root.findViewById(R.id.etxIncidencias);
         final Button send = root.findViewById(R.id.btnEnviar);
-        //final Button back = root.findViewById(R.id.btnHome);
+        final Button back = root.findViewById(R.id.btnHome);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,14 +41,13 @@ public class WriteIncidentFragment extends Fragment {
                 }
             }
         });
-        /*back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (writeIncidents.getText().toString() != null) {
-                    writeIncidentViewModel.WriteOnFirebase(writeIncidents.getText().toString());
-                }
+                getActivity().getSupportFragmentManager().beginTransaction().replace(
+                        R.id.MainActivity, new MenuFragment()).commit();
             }
-        });*/
+        });
 
         return root;
     }
