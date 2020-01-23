@@ -1,6 +1,5 @@
 package com.android.timeco.Model;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Date;
 
@@ -8,7 +7,7 @@ import java.util.Date;
  *  Class Worklog this class is used for save the time as work the user, also save the start and the
  *  end of work time, at last save the time of break time.
  */
-public class Worklog implements Serializable {
+public class Worklog {
 
     private Date dateInit;
     private Date dateEnd;
