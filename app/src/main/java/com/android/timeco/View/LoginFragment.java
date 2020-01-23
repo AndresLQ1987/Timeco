@@ -101,7 +101,7 @@ public class LoginFragment extends Fragment {
      */
     private void changeToHome(){
         getActivity().getSupportFragmentManager().beginTransaction().replace(
-                R.id.MainActivity, new HomeFragment()).commit();
+                R.id.MainActivity, new MenuFragment()).commit();
     }
 
 }
