@@ -76,7 +76,7 @@ public class WorklogsFragment extends Fragment {
         //TODO Methods gets information to ViewModel
         worklogsViewModel = new WorklogsViewModel();
         rv_worklogs = ui_layout.findViewById(R.id.rv_worklogs);
-        btnBack = ui_layout.findViewById(R.id.btn_w_Back);
+        btnBack = ui_layout.findViewById(R.id.btnBack);
 
         rv_worklogs.setLayoutManager(new LinearLayoutManager(getActivity()));
         ArrayList<Worklog> listWorklogs = worklogsViewModel.getWorklogs(MainActivity.currentUser);
@@ -87,7 +87,7 @@ public class WorklogsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new HomeFragment()).commit();
+                        R.id.MainActivity, new MenuFragment()).commit();
             }
         });
 

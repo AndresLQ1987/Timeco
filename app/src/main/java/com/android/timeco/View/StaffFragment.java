@@ -100,7 +100,7 @@ public class StaffFragment extends Fragment {
                         et_username.getText().toString(),
                         et_password.getText().toString()))
                     getActivity().getSupportFragmentManager().beginTransaction().replace(
-                            R.id.MainActivity, new HomeFragment()).commit();
+                            R.id.MainActivity, new MenuFragment()).commit();
 
             }
         });
@@ -109,7 +109,7 @@ public class StaffFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new HomeFragment()).commit();
+                        R.id.MainActivity, new MenuFragment()).commit();
             }
         });
 
