@@ -2,9 +2,11 @@ package com.android.timeco.View;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.HomeViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeFragment extends Fragment {
 
@@ -92,6 +95,7 @@ public class HomeFragment extends Fragment {
 
         btnBack = ui_layout.findViewById(R.id.btnBack);
         btnReg = ui_layout.findViewById(R.id.button_reg);
+
 
         //ActionListener of button Worklogs to go work logs fragment
         btnBack.setOnClickListener(new View.OnClickListener() {
