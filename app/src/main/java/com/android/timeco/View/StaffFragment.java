@@ -89,7 +89,7 @@ public class StaffFragment extends Fragment {
         et_password = ui_layout.findViewById(R.id.txt_Staff_Password);
         //TODO Rename id button to btn_confirm
         bt_confirm = ui_layout.findViewById(R.id.btn_confirmDelete);
-        bt_back = ui_layout.findViewById(R.id.btn_staff_back);
+        bt_back = ui_layout.findViewById(R.id.btn_editCancel);
 
         bt_confirm.setOnClickListener(new View.OnClickListener() {
             @Override

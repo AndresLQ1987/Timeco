@@ -1,5 +1,7 @@
 package com.android.timeco.ViewModel;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -77,11 +79,13 @@ public class IncidentsViewViewModel extends ViewModel {
 
         db.child("timeco incidents").child("mensajes").child(msgID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {/*
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     incidentList.add(postSnapshot.getValue(Message.class).getMensaje());
 
-                }
+                }*/
+                incidentList.add(dataSnapshot.getValue(Message.class).getMensaje());
+                Log.i("Fallo Thread", dataSnapshot.getValue(Message.class).getMensaje());
             }
 
             @Override
@@ -90,6 +94,6 @@ public class IncidentsViewViewModel extends ViewModel {
             }
         });
 
-        return new ArrayList<>();
+        return incidentList;
     }
 }

@@ -41,19 +41,19 @@ public class IncidentsViewFragment extends Fragment {
 
         incidentsViewViewModel = new IncidentsViewViewModel();
         recyclerView = ui_layout.findViewById(R.id.incidents_recycler);
-        btnBack = ui_layout.findViewById(R.id.btnBack);
+        btnBack = ui_layout.findViewById(R.id.btn_editCancel);
 
         // Declaro mi Adapter y le paso el argumento de los datos que quiero que imprima
         ArrayList<String> listaVacia = new ArrayList<>();
         listaVacia.add("La lista está vacía.");
 
-       // if (incidentsViewViewModel.getListadoRecycler(incidentsViewViewModel.getMsgID().getValue()).isEmpty()){
+        if (incidentsViewViewModel.getListadoRecycler("-LzIgQHBgTjzn1pdg9Vj").isEmpty()){
             mAdapter = new IncidentAdapter(listaVacia);
 
-       // } else {
-       //     mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler(incidentsViewViewModel.getMsgID().getValue()));
+       } else {
+            mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler("-LzIgQHBgTjzn1pdg9Vj"));
 
-       // }
+        }
 
 
         // use a linear layout manager. Con el LinearLayout le indico al recycler que se pinte en linea. Existen otras formas

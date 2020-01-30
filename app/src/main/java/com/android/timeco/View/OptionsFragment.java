@@ -70,7 +70,7 @@ public class OptionsFragment extends Fragment {
         View ui_layout = inflater.inflate(R.layout.fragment_options, container, false);
 
         //TODO get information and sent to ViewModel
-        bt_back = ui_layout.findViewById(R.id.btnBack);
+        bt_back = ui_layout.findViewById(R.id.btn_editCancel);
 
         bt_back.setOnClickListener(new View.OnClickListener() {
             @Override
