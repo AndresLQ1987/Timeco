@@ -1,6 +1,5 @@
 package com.android.timeco.View;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.IncidentsViewViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class IncidentsViewFragment extends Fragment {
@@ -42,55 +39,29 @@ public class IncidentsViewFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View ui_layout = inflater.inflate(R.layout.incidents_view_fragment, container, false);
 
-        incidentsViewViewModel = ViewModelProviders.of(this).get(IncidentsViewViewModel.class);
-
+        incidentsViewViewModel = new IncidentsViewViewModel();
         recyclerView = ui_layout.findViewById(R.id.incidents_recycler);
-        btnBack = ui_layout.findViewById(R.id.btnBack);
-
-        incidentsViewViewModel.readlistaMensajes(); // ID del Usuario para leer sus mensajes
-
-        incidentsViewViewModel.getlistaMensajes().observe(this, new Observer<ArrayList<String>>() {
-            @Override
-            public void onChanged(ArrayList<String> strings) {
-                mAdapter = new IncidentAdapter(strings);
-                recyclerView.setAdapter(mAdapter);
-            }
-        });
+        btnBack = ui_layout.findViewById(R.id.btn_editCancel);
 
         // Declaro mi Adapter y le paso el argumento de los datos que quiero que imprima
-        //ArrayList<String> listaVacia = new ArrayList<>();
-        //listaVacia.add("La lista está vacía.");
+        ArrayList<String> listaVacia = new ArrayList<>();
+        listaVacia.add("La lista está vacía.");
 
-        /*Adaptardor que carga en el Recycler el ArrayList manual
-        mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler());*/
+        if (incidentsViewViewModel.getListadoRecycler("-LzIgQHBgTjzn1pdg9Vj").isEmpty()){
+            mAdapter = new IncidentAdapter(listaVacia);
 
-        //Creo observer para el ejemplo LiveData + ArrayList
+       } else {
+            mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler("-LzIgQHBgTjzn1pdg9Vj"));
 
-        /*incidentsViewViewModel.listaMensajes(); //Cargo el método donde estan los datos
-
-        incidentsViewViewModel.getListaMensajes().observe(this, new Observer<ArrayList<String>>() {
-            @Override
-            public void onChanged(ArrayList<String> strings) {
-                mAdapter = new IncidentAdapter(strings);
-                recyclerView.setAdapter(mAdapter); //Cargo el adaptador, si no lo hago así cargaría vacío porque no da tiempo al proceso de recogida de datos
-            }
-        });*/
-
-       // if (incidentsViewViewModel.getListadoRecycler(incidentsViewViewModel.getMsgID().getValue()).isEmpty()){
-       //     mAdapter = new IncidentAdapter(listaVacia);
-
-       // } else {
-       //     mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler(incidentsViewViewModel.getMsgID().getValue()));
-
-       // }
+        }
 
 
         // use a linear layout manager. Con el LinearLayout le indico al recycler que se pinte en linea. Existen otras formas
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        /* Cargo mi adaptador del recicler
-        recyclerView.setAdapter(mAdapter);*/
+        // Cargo mi adaptador del recicler
+        recyclerView.setAdapter(mAdapter);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +72,13 @@ public class IncidentsViewFragment extends Fragment {
         });
 
         return ui_layout;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        incidentsViewViewModel = ViewModelProviders.of(this).get(IncidentsViewViewModel.class);
+        // TODO: Use the ViewModel
     }
 
     // Antes que la clase Adapter, creo la clase Holder

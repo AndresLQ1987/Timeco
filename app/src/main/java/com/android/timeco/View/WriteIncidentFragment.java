@@ -31,8 +31,8 @@ public class WriteIncidentFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_write_incident, container, false);
 
         final EditText writeIncidents = root.findViewById(R.id.etxIncidencias);
-        final Button send = root.findViewById(R.id.btnEnviar);
-        final Button back = root.findViewById(R.id.btnBack);
+        final Button send = root.findViewById(R.id.btn_Send);
+        final Button back = root.findViewById(R.id.btn_editCancel);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
