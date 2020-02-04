@@ -7,6 +7,7 @@ import com.android.timeco.MainActivity;
 import com.android.timeco.Model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class LoginViewModel have methods to process the information gets in view login
@@ -20,7 +21,7 @@ public class LoginViewModel extends ViewModel {
      * @return
      */
     public boolean checkCredentials(String username, String password){
-        ArrayList<User> userList = MainActivity.accessData.getUsers();
+        List<User> userList = MainActivity.accessData.getUsers();
         for (User user : userList) {
             if (checkUser(user, username, password)) {
                 MainActivity.currentUser = user;
