@@ -1,5 +1,6 @@
 package com.android.timeco.View;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,16 +41,30 @@ public class IncidentsViewFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View ui_layout = inflater.inflate(R.layout.incidents_view_fragment, container, false);
 
-        incidentsViewViewModel = new IncidentsViewViewModel();
+        incidentsViewViewModel = ViewModelProviders.of(this).get(IncidentsViewViewModel.class);
+
         recyclerView = ui_layout.findViewById(R.id.incidents_recycler);
         btnBack = ui_layout.findViewById(R.id.btnBack);
 
+       /* incidentsViewViewModel.readMsgID("pVBEOgINbVOGdkne7Sjhg3ycW6h2"); // ID del Usuario para leer sus mensajes
+
+        incidentsViewViewModel.getMsgID().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                incidentsViewViewModel.readMsg(s);
+                Log.i("VIEWMODEL getMsgID", s);
+            }
+        });*/
+
         // Declaro mi Adapter y le paso el argumento de los datos que quiero que imprima
-        ArrayList<String> listaVacia = new ArrayList<>();
-        listaVacia.add("La lista está vacía.");
+        //ArrayList<String> listaVacia = new ArrayList<>();
+        //listaVacia.add("La lista está vacía.");
+
+        //Adaptardor que carga en el Recycler el ArrayList manual
+        mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler());
 
        // if (incidentsViewViewModel.getListadoRecycler(incidentsViewViewModel.getMsgID().getValue()).isEmpty()){
-            mAdapter = new IncidentAdapter(listaVacia);
+       //     mAdapter = new IncidentAdapter(listaVacia);
 
        // } else {
        //     mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler(incidentsViewViewModel.getMsgID().getValue()));
@@ -72,13 +88,6 @@ public class IncidentsViewFragment extends Fragment {
         });
 
         return ui_layout;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        incidentsViewViewModel = ViewModelProviders.of(this).get(IncidentsViewViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     // Antes que la clase Adapter, creo la clase Holder

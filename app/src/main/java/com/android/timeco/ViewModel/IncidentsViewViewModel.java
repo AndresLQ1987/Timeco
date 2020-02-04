@@ -18,10 +18,12 @@ public class IncidentsViewViewModel extends ViewModel {
 
     private MutableLiveData<Message> mMsg;
     private MutableLiveData<String> msgID;
+    private MutableLiveData<ArrayList<Message>> listaMensajes;
 
     public IncidentsViewViewModel() {
         mMsg = new MutableLiveData<>();
         msgID = new MutableLiveData<>();
+        listaMensajes = new MutableLiveData<>();
 
     }
 
@@ -32,6 +34,8 @@ public class IncidentsViewViewModel extends ViewModel {
     public LiveData<String> getMsgID() {
         return msgID;
     }
+
+    //public LiveData<Message> getListaMensajes() { return listaMensajes; }
 
     public void readMsgID(String uid){
 
@@ -69,11 +73,17 @@ public class IncidentsViewViewModel extends ViewModel {
 
     }
 
-    //Metodo inventado para probar RecyclerView
-    public ArrayList<String> getListadoRecycler(String msgID){
+    //Metodo inventado para probar RecyclerView con un ArrayList manual
+    public ArrayList<String> getListadoRecycler(){
         final ArrayList<String> incidentList = new ArrayList<>();
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        incidentList.add("Incidencia 1");
+        incidentList.add("Incidencia 2");
+        incidentList.add("Incidencia 3");
+        incidentList.add("Incidencia 4");
+        incidentList.add("Incidencia 5");
+
+/*        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
         db.child("timeco incidents").child("mensajes").child(msgID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,8 +98,8 @@ public class IncidentsViewViewModel extends ViewModel {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
-        return new ArrayList<>();
+        return incidentList;
     }
 }
