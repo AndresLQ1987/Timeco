@@ -32,7 +32,7 @@ public class WriteIncidentFragment extends Fragment {
 
         final EditText writeIncidents = root.findViewById(R.id.etxIncidencias);
         final Button send = root.findViewById(R.id.btn_Send);
-        final Button back = root.findViewById(R.id.btn_editCancel);
+        final Button back = root.findViewById(R.id.bt_back);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

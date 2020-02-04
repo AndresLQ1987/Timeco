@@ -41,7 +41,7 @@ public class IncidentsViewFragment extends Fragment {
 
         incidentsViewViewModel = new IncidentsViewViewModel();
         recyclerView = ui_layout.findViewById(R.id.incidents_recycler);
-        btnBack = ui_layout.findViewById(R.id.btn_editCancel);
+        btnBack = ui_layout.findViewById(R.id.bt_back);
 
         // Declaro mi Adapter y le paso el argumento de los datos que quiero que imprima
         ArrayList<String> listaVacia = new ArrayList<>();
