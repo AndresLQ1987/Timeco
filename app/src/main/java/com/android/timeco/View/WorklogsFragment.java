@@ -77,7 +77,7 @@ public class WorklogsFragment extends Fragment {
         //TODO Methods gets information to ViewModel
         worklogsViewModel = new WorklogsViewModel();
         rv_worklogs = ui_layout.findViewById(R.id.rv_worklogs);
-        btnBack = ui_layout.findViewById(R.id.btn_editCancel);
+        btnBack = ui_layout.findViewById(R.id.bt_back);
 
         rv_worklogs.setLayoutManager(new LinearLayoutManager(getActivity()));
         List<Worklog> listWorklogs = worklogsViewModel.getWorklogs(MainActivity.currentUser);

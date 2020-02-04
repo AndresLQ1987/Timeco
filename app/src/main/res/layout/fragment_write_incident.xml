@@ -37,8 +37,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textTitulo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="413dp"
+        android:layout_height="59dp"
         android:background="@drawable/border_top"
         android:clipChildren="false"
         android:clipToPadding="false"
@@ -50,18 +50,17 @@
         app:layout_constraintVertical_bias="1.0">
 
         <Button
-            android:id="@+id/btn_editCancel"
+            android:id="@+id/bt_back"
             android:layout_width="45dp"
             android:layout_height="35dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/ic_home"
-            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.083"
             tools:ignore="DuplicateIds" />
 
         <Button
@@ -73,24 +72,23 @@
             android:background="@drawable/ic_enviar"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_info"
+            app:layout_constraintStart_toEndOf="@+id/bt_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/btn_confirmDelete"
+            android:id="@+id/btn_info"
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
             android:background="@drawable/ic_info"
-            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
-            app:layout_constraintStart_toEndOf="@+id/btn_editCancel"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.166" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

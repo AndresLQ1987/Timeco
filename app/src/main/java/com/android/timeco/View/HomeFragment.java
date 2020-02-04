@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment {
 
     private Button btnBack;
     private Button btnReg;
+    private Button btnInfo;
 
     private EditText et_start_hours;
     private EditText et_start_minuts;
@@ -90,8 +91,9 @@ public class HomeFragment extends Fragment {
         et_rest_hours = ui_layout.findViewById(R.id.etxt_pause_h);
         et_rest_minuts = ui_layout.findViewById(R.id.etxt_pause_m);
 
-        btnBack = ui_layout.findViewById(R.id.btn_editCancel);
-        btnReg = ui_layout.findViewById(R.id.btn_editCancel);
+        btnBack = ui_layout.findViewById(R.id.bt_back);
+        btnReg = ui_layout.findViewById(R.id.bt_check);
+        btnInfo = ui_layout.findViewById(R.id.btn_info);
 
 
         //ActionListener of button Worklogs to go work logs fragment
