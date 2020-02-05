@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.IncidentsViewViewModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class IncidentsViewFragment extends Fragment {
@@ -46,22 +47,34 @@ public class IncidentsViewFragment extends Fragment {
         recyclerView = ui_layout.findViewById(R.id.incidents_recycler);
         btnBack = ui_layout.findViewById(R.id.btnBack);
 
-       /* incidentsViewViewModel.readMsgID("pVBEOgINbVOGdkne7Sjhg3ycW6h2"); // ID del Usuario para leer sus mensajes
+        incidentsViewViewModel.readlistaMensajes(); // ID del Usuario para leer sus mensajes
 
-        incidentsViewViewModel.getMsgID().observe(this, new Observer<String>() {
+        incidentsViewViewModel.getlistaMensajes().observe(this, new Observer<ArrayList<String>>() {
             @Override
-            public void onChanged(String s) {
-                incidentsViewViewModel.readMsg(s);
-                Log.i("VIEWMODEL getMsgID", s);
+            public void onChanged(ArrayList<String> strings) {
+                mAdapter = new IncidentAdapter(strings);
+                recyclerView.setAdapter(mAdapter);
             }
-        });*/
+        });
 
         // Declaro mi Adapter y le paso el argumento de los datos que quiero que imprima
         //ArrayList<String> listaVacia = new ArrayList<>();
         //listaVacia.add("La lista está vacía.");
 
-        //Adaptardor que carga en el Recycler el ArrayList manual
-        mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler());
+        /*Adaptardor que carga en el Recycler el ArrayList manual
+        mAdapter = new IncidentAdapter(incidentsViewViewModel.getListadoRecycler());*/
+
+        //Creo observer para el ejemplo LiveData + ArrayList
+
+        /*incidentsViewViewModel.listaMensajes(); //Cargo el método donde estan los datos
+
+        incidentsViewViewModel.getListaMensajes().observe(this, new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> strings) {
+                mAdapter = new IncidentAdapter(strings);
+                recyclerView.setAdapter(mAdapter); //Cargo el adaptador, si no lo hago así cargaría vacío porque no da tiempo al proceso de recogida de datos
+            }
+        });*/
 
        // if (incidentsViewViewModel.getListadoRecycler(incidentsViewViewModel.getMsgID().getValue()).isEmpty()){
        //     mAdapter = new IncidentAdapter(listaVacia);
@@ -76,8 +89,8 @@ public class IncidentsViewFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        // Cargo mi adaptador del recicler
-        recyclerView.setAdapter(mAdapter);
+        /* Cargo mi adaptador del recicler
+        recyclerView.setAdapter(mAdapter);*/
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,39 +12,44 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class IncidentsViewViewModel extends ViewModel {
 
-    private MutableLiveData<Message> mMsg;
-    private MutableLiveData<String> msgID;
-    private MutableLiveData<ArrayList<Message>> listaMensajes;
+    private MutableLiveData<ArrayList<String>> listaMensajes;
+    //private MutableLiveData<ArrayList<String>> listaMensajes;
 
     public IncidentsViewViewModel() {
-        mMsg = new MutableLiveData<>();
-        msgID = new MutableLiveData<>();
+
         listaMensajes = new MutableLiveData<>();
 
     }
 
-    public LiveData<Message> getMsg() {
-        return mMsg;
-    }
+    public LiveData<ArrayList<String>> getlistaMensajes() { return listaMensajes; }
 
-    public LiveData<String> getMsgID() {
-        return msgID;
-    }
 
-    //public LiveData<Message> getListaMensajes() { return listaMensajes; }
+    //public LiveData<ArrayList<String>> getListaMensajes() { return listaMensajes; }
 
-    public void readMsgID(String uid){
+    public void readlistaMensajes(){
+
+        final ArrayList<String> incidentList = new ArrayList<>();
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-        db.child("timeco incidents").child("usuarios").child(uid).child("mensaje").addValueEventListener(new ValueEventListener() {
+        db.child("timeco incidents").child("mensajes").addValueEventListener(new ValueEventListener()
+            {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                msgID.postValue(dataSnapshot.getValue(String.class));
+
+                for(DataSnapshot i : dataSnapshot.getChildren()){
+
+                    //String mensaje = i.child("mensaje").getValue(String.class);
+                    Message msg = i.getValue(Message.class);
+                    incidentList.add(msg.getMensaje());
+                }
+
+                listaMensajes.postValue(incidentList);
             }
 
             @Override
@@ -55,26 +60,10 @@ public class IncidentsViewViewModel extends ViewModel {
 
     }
 
-    public void readMsg(String msgID){
-
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
-        db.child("timeco incidents").child("mensajes").child(msgID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mMsg.postValue(dataSnapshot.getValue(Message.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     //Metodo inventado para probar RecyclerView con un ArrayList manual
-    public ArrayList<String> getListadoRecycler(){
+
+   /* public ArrayList<String> getListadoRecycler(){
         final ArrayList<String> incidentList = new ArrayList<>();
 
         incidentList.add("Incidencia 1");
@@ -83,23 +72,25 @@ public class IncidentsViewViewModel extends ViewModel {
         incidentList.add("Incidencia 4");
         incidentList.add("Incidencia 5");
 
-/*        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
-        db.child("timeco incidents").child("mensajes").child(msgID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    incidentList.add(postSnapshot.getValue(Message.class).getMensaje());
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
         return incidentList;
-    }
+    }*/
+
+  //Método para probar el RecyclerView con un ArrayList manual haciendo uso del LiveData
+
+  /*public void listaMensajes() {
+
+      ArrayList<String> incidentList = new ArrayList<>();
+
+      incidentList.add("Incidencia 1");
+      incidentList.add("Incidencia 2");
+      incidentList.add("Incidencia 3");
+      incidentList.add("Incidencia 4");
+      incidentList.add("Incidencia 5");
+
+      listaMensajes.postValue(incidentList);
+
+
+
+  }*/
+
 }
