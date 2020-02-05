@@ -100,20 +100,4 @@ public class Worklog {
         int minutes = (int) ((fHours - hours) * 60);
         return fm.format(hours) + ":" + fm.format(minutes);
     }
-
-//    @TypeConverter
-//    public static Date fromTimestamp(String value) {
-//        try {
-//            return value == null ? null : new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
-//                    Locale.ENGLISH).parse(value);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    @TypeConverter
-//    public static String dateToTimestamp(Date date) {
-//        return date == null ? null : date.toString();
-//    }
 }

@@ -23,6 +23,9 @@ public interface WorklogDao {
     @Query("SELECT * FROM Worklog WHERE id LIKE :uuid")
     Worklog getWorklog(String uuid);
 
+    @Query("SELECT * FROM Worklog WHERE username LIKE :user")
+    List<Worklog> getWorklogsByUser(String user);
+
     @Insert
     void addWorklog(Worklog worklog);
 

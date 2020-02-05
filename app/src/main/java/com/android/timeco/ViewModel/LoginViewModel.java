@@ -2,11 +2,9 @@ package com.android.timeco.ViewModel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.android.timeco.AccessData;
 import com.android.timeco.MainActivity;
 import com.android.timeco.Model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,13 +20,13 @@ public class LoginViewModel extends ViewModel {
      */
     public boolean checkCredentials(String username, String password){
         List<User> userList = MainActivity.accessData.getUsers();
+        if (userList.size() == 0) MainActivity.accessData.insertFirstUser();
         for (User user : userList) {
             if (checkUser(user, username, password)) {
                 MainActivity.currentUser = user;
                 return true;
             }
         }
-        MainActivity.accessData.insertAdmin();
         return false;
     }
     //TODO cypher passwords

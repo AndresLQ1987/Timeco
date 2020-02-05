@@ -20,8 +20,8 @@ public class AccessData {
     @SuppressLint("StaticFieldLeak")
     private static AccessData sAccessData;
 
-    public static UserDao userDao;
-    public static WorklogDao worklogDao;
+    private UserDao userDao;
+    private WorklogDao worklogDao;
 
     private AccessData (Context ctx){
         Context appContext = ctx.getApplicationContext();
@@ -70,10 +70,10 @@ public class AccessData {
      * @return ArrayList<Worklog> with all work logs
      */
     public List<Worklog> getWorklogs(User user){
-        return worklogDao.getWorklogs();
+        return worklogDao.getWorklogsByUser(user.getUsername());
     }
 
-    public void insertAdmin(){
+    public void insertFirstUser(){
         if(userDao.getUsers().size() == 0)
             userDao.addUser(new User("user", "pass", "Admin User Fullname", 2));
     }
@@ -81,25 +81,4 @@ public class AccessData {
     public void deleteUser(User user){
         userDao.deleteUser(user);
     }
-
-//    @Override
-//    public void onCreate(SQLiteDatabase db) {
-//        db.execSQL("CREATE TABLE IF NOT EXISTS Users (" +
-//                "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-//                "Username TEXT NOT NULL," +
-//                "Password TEXT NOT NULL," +
-//                "FullName TEXT NOT NULL," +
-//                "Rol TEXT)");
-//
-//        db.execSQL("CREATE TABLE IF NOT EXISTS Worklogs (" +
-//                "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-//                "Username TEXT NOT NULL," +
-//                "DateInit TEXT NOT NULL," +
-//                "DateEnd TEXT NOT NULL," +
-//                "RestTime FLOAT DEFAULT 0)");
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//    }
 }
