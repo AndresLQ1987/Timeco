@@ -1,14 +1,30 @@
 package com.android.timeco.Model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  *  Class Worklog this class is used for save the time as work the user, also save the start and the
  *  end of work time, at last save the time of break time.
  */
+@Entity(tableName = "Worklog")
 public class Worklog {
 
+    @PrimaryKey
+    @NonNull
+    private String id;
+    @NonNull
+    private String username;
     private Date dateInit;
     private Date dateEnd;
     private float restTime;
@@ -23,79 +39,36 @@ public class Worklog {
      * @param dEnd Date work ends
      * @param rTime float
      */
-    public Worklog(Date dInit, Date dEnd, float rTime){
+    public Worklog(String usern, Date dInit, Date dEnd, float rTime){
+        id = UUID.randomUUID().toString();
+        username = usern;
         dateInit = dInit;
         dateEnd = dEnd;
         restTime = rTime;
         CalculateWorkedTime(dInit,dEnd,rTime);
     }
 
+    public Worklog(){
+        id = UUID.randomUUID().toString();
+    }
+
     //SETTERS
 
-    /**
-     * Set the Date work begins
-     *
-     * @param dateInit Date
-     */
-    public void setDateInit(Date dateInit) {
-        this.dateInit = dateInit;
-    }
-
-    /**
-     * Set the Date work ends
-     *
-     * @param dateEnd Date
-     */
-    public void setDateEnd(Date dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
-    /**
-     * Set the break time
-     *
-     * @param restTime float to set the rest time
-     */
-    public void setRestTime(float restTime) {
-        this.restTime = restTime;
-    }
+    public void setId(@NonNull String id) { this.id = id; }
+    public void setUsername(@NonNull String username) { this.username = username; }
+    public void setDateInit(Date dateInit) { this.dateInit = dateInit; }
+    public void setDateEnd(Date dateEnd) { this.dateEnd = dateEnd; }
+    public void setRestTime(float restTime) { this.restTime = restTime; }
+    public void setWorkedTime(float workedTime) { this.workedTime = workedTime; }
 
      //GETTERS
 
-    /**
-     * Get the date when work begins
-     *
-     * @return Date
-     */
-    public Date getDateInit() {
-        return dateInit;
-    }
-
-    /**
-     * Get the date when work ends
-     *
-     * @return Date
-     */
-    public Date getDateEnd() {
-        return dateEnd;
-    }
-
-    /**
-     * Get the time of break in hours
-     *
-     * @return float
-     */
-    public float getRestTime() {
-        return restTime;
-    }
-
-    /**
-     * Get the total time worked in hours
-     *
-     * @return float
-     */
-    public float getWorkedTime() {
-        return workedTime;
-    }
+    public String getId(){ return id; }
+    public String getUsername() { return username; }
+    public Date getDateInit() { return dateInit; }
+    public Date getDateEnd() { return dateEnd; }
+    public float getRestTime() { return restTime; }
+    public float getWorkedTime() { return workedTime; }
 
      // METHODS
 

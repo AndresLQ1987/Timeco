@@ -19,6 +19,7 @@ import com.android.timeco.R;
 import com.android.timeco.ViewModel.WorklogsViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WorklogsFragment extends Fragment {
 
@@ -79,7 +80,7 @@ public class WorklogsFragment extends Fragment {
         btnBack = ui_layout.findViewById(R.id.btnBack);
 
         rv_worklogs.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ArrayList<Worklog> listWorklogs = worklogsViewModel.getWorklogs(MainActivity.currentUser);
+        List<Worklog> listWorklogs = worklogsViewModel.getWorklogs(MainActivity.currentUser);
         RecyclerAdapterWorklogs adapterWorklogs = new RecyclerAdapterWorklogs(listWorklogs);
         rv_worklogs.setAdapter(adapterWorklogs);
 
@@ -100,9 +101,9 @@ public class WorklogsFragment extends Fragment {
      */
     public class RecyclerAdapterWorklogs extends RecyclerView.Adapter<RecyclerAdapterWorklogs.WorklogHolder> {
 
-        private ArrayList<Worklog> worklogs;
+        private List<Worklog> worklogs;
 
-        public RecyclerAdapterWorklogs(ArrayList<Worklog> worklogs) {
+        public RecyclerAdapterWorklogs(List<Worklog> worklogs) {
             this.worklogs = worklogs;
         }
 
