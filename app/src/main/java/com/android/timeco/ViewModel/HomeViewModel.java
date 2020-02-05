@@ -21,7 +21,7 @@ public class HomeViewModel extends ViewModel {
         Date dateEnd = getDateFromInputs(endHours, endMinutes);
         float restTime = formatInputToFloat(restHours, restMinutes);
 
-        Worklog worklog = new Worklog(dateInit, dateEnd, restTime);
+        Worklog worklog = new Worklog(MainActivity.currentUser.getUsername(),dateInit, dateEnd, restTime);
 
         MainActivity.accessData.saveWorklogs(MainActivity.currentUser, worklog);
     }

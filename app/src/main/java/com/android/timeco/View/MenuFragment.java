@@ -17,18 +17,12 @@ import com.android.timeco.R;
  */
 public class MenuFragment extends Fragment {
 
-    Button registroBtn;
-    Button visualizarBtn;
-    Button escribirBtn;
-    Button verBtn;
-    Button gestionBtn;
-    Button configBtn;
-    Button exitBtn;
+    Button registroBtn, visualizarBtn, escribirBtn,
+     verBtn, gestionBtn, configBtn, exitBtn;
 
     public MenuFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

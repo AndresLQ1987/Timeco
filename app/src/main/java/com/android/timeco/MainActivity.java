@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        accessData = new AccessData(this, "DataBaseTimeco", null, 1);
+        accessData = AccessData.getAccessData(this);
 
         // Draw the first fragment
         fm = getSupportFragmentManager();
