@@ -13,7 +13,13 @@ import com.android.timeco.Model.UserDao;
 import com.android.timeco.Model.Worklog;
 import com.android.timeco.Model.WorklogDao;
 
+
 import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 
 public class AccessData {
 
@@ -22,6 +28,9 @@ public class AccessData {
 
     private UserDao userDao;
     private WorklogDao worklogDao;
+    private Connection conn = null;
+    private String user = "ada";
+    private String pwd = "lovelace";
 
     private AccessData (Context ctx){
         Context appContext = ctx.getApplicationContext();
@@ -80,5 +89,44 @@ public class AccessData {
 
     public void deleteUser(User user){
         userDao.deleteUser(user);
+    }
+
+    public void createTablesInPostgres(){
+
+        Thread hiloPostgres = new Thread() {
+            @Override
+            public void run(){
+                try {
+                    Class.forName("org.postgresql.Driver");
+
+                    conn = DriverManager.getConnection("","ada","lovelace");
+
+                    Statement st = conn.createStatement();
+
+                    st.executeUpdate("CREATE IF NOT EXISTS User(id varchar(100) NOT NULL," +
+                            "username varchar(100) NOT NULL," +
+                            "password varchar(100) NOT NULL," +
+                            "fullname varchar(150)," +
+                            "rol int NOT NULL," +
+                            "PRIMARY KEY(id));");
+                    st.executeUpdate("CREATE IF NOT EXISTS Worklog(id varchar(100) NOT NULL," +
+                            "username varchar(100) NOT NULL," +
+                            "dateInit datetime NOT NULL," +
+                            "dateEnd datetime NOT NULL," +
+                            "restTime float(20,2)," +
+                            "PRIMARY KEY(id));");
+                } catch (SQLException sqle) {
+                    sqle.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
     }
 }
