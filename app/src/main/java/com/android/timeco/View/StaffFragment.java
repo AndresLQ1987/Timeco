@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.timeco.MainActivity;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.StaffViewModel;
 
@@ -100,9 +101,10 @@ public class StaffFragment extends Fragment {
                         et_position.getText().toString(),
                         et_username.getText().toString(),
                         et_password.getText().toString())) {
+                    MainActivity.accessData.insertInPostgres();
+                    Toast.makeText(getContext(), "Usuario añadido correctamente", Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(
                             R.id.MainActivity, new MenuFragment()).commit();
-                    Toast.makeText(getContext(), "Usuario añadido correctamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });
