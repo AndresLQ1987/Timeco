@@ -31,6 +31,7 @@ public class AccessData {
     private Connection conn = null;
     private String user = "ada";
     private String pwd = "lovelace";
+    private String url = "jdbc:postgresql://192.168.0.22:/ada";
 
     private AccessData (Context ctx){
         Context appContext = ctx.getApplicationContext();
@@ -91,7 +92,7 @@ public class AccessData {
         userDao.deleteUser(user);
     }
 
-    public void createTablesInPostgres(){
+    public void insertInPostgres(){
 
         Thread hiloPostgres = new Thread() {
             @Override
@@ -99,22 +100,12 @@ public class AccessData {
                 try {
                     Class.forName("org.postgresql.Driver");
 
-                    conn = DriverManager.getConnection("","ada","lovelace");
+                    conn = DriverManager.getConnection(url,user,pwd);
 
                     Statement st = conn.createStatement();
 
-                    st.executeUpdate("CREATE IF NOT EXISTS User(id varchar(100) NOT NULL," +
-                            "username varchar(100) NOT NULL," +
-                            "password varchar(100) NOT NULL," +
-                            "fullname varchar(150)," +
-                            "rol int NOT NULL," +
-                            "PRIMARY KEY(id));");
-                    st.executeUpdate("CREATE IF NOT EXISTS Worklog(id varchar(100) NOT NULL," +
-                            "username varchar(100) NOT NULL," +
-                            "dateInit datetime NOT NULL," +
-                            "dateEnd datetime NOT NULL," +
-                            "restTime float(20,2)," +
-                            "PRIMARY KEY(id));");
+                    st.executeUpdate("Insert into usuario values('aadasda','test','prueba'" +
+                            "'usuario de prueba',2)");
                 } catch (SQLException sqle) {
                     sqle.printStackTrace();
                 } catch (ClassNotFoundException e) {
