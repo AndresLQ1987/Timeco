@@ -28,10 +28,10 @@ public class AccessData {
 
     private UserDao userDao;
     private WorklogDao worklogDao;
-    private Connection conn = null;
+    private Connection conn;
     private String user = "ada";
     private String pwd = "lovelace";
-    private String url = "jdbc:postgresql://192.168.0.22:/ada";
+    private String url = "jdbc:postgresql://192.168.0.22:5432/ada";
 
     private AccessData (Context ctx){
         Context appContext = ctx.getApplicationContext();
@@ -119,6 +119,6 @@ public class AccessData {
                 }
             }
         };
-        //hiloPostgres.start();
+        hiloPostgres.start();
     }
 }
