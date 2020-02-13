@@ -117,6 +117,14 @@ public class AccessData {
                         e.printStackTrace();
                     }
                 }
+//                finally
+//                 {
+//                    try {
+//                        conn.close();
+//                    } catch (SQLException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
             }
         };
         hiloPostgres.start();
