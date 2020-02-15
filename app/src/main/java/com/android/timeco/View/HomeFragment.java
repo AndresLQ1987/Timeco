@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.timeco.AccessData;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.HomeViewModel;
 
@@ -29,10 +28,9 @@ public class HomeFragment extends Fragment {
      * Elements of Fragment
      */
 
-    private Button btnWorklog;
-    private Button btnStaff;
-    private Button btnOptions;
+    private Button btnBack;
     private Button btnReg;
+    private Button btnInfo;
 
     private EditText et_start_hours;
     private EditText et_start_minuts;
@@ -93,35 +91,17 @@ public class HomeFragment extends Fragment {
         et_rest_hours = ui_layout.findViewById(R.id.etxt_pause_h);
         et_rest_minuts = ui_layout.findViewById(R.id.etxt_pause_m);
 
-        btnWorklog = ui_layout.findViewById(R.id.btn_Worklogs);
-        btnStaff = ui_layout.findViewById(R.id.btn_staff);
-        btnOptions = ui_layout.findViewById(R.id.btn_options);
-        btnReg = ui_layout.findViewById(R.id.button_reg);
+        btnBack = ui_layout.findViewById(R.id.bt_back);
+        btnReg = ui_layout.findViewById(R.id.bt_check);
+        btnInfo = ui_layout.findViewById(R.id.btn_info);
+
 
         //ActionListener of button Worklogs to go work logs fragment
-        btnWorklog.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new WorklogsFragment()).commit();
-            }
-        });
-
-        //ActionListener of button staff to go staff fragment
-        btnStaff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new StaffFragment()).commit();
-            }
-        });
-
-        //ActionListener of button options to go options fragment
-        btnOptions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new OptionsFragment()).commit();
+                        R.id.MainActivity, new MenuFragment()).commit();
             }
         });
 
@@ -135,6 +115,8 @@ public class HomeFragment extends Fragment {
                         et_rest_hours .getText().toString(), et_rest_minuts.getText().toString());
 
                 resetInputs();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(
+                        R.id.MainActivity, new MenuFragment()).commit();
             }
         });
 

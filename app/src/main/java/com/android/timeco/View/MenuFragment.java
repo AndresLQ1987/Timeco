@@ -58,7 +58,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new WriteIncident()).commit();
+                        R.id.MainActivity, new WriteIncidentFragment()).commit();
             }
         });
 
@@ -66,8 +66,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        //Falta por crear el fragment de ver incidencias!!!
-                        R.id.MainActivity, new WorklogsFragment()).commit();
+                        R.id.MainActivity, new IncidentsViewFragment()).commit();
             }
         });
 
