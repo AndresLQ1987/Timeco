@@ -1,7 +1,5 @@
 package com.android.timeco.ViewModel;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -22,7 +20,6 @@ public class IncidentsViewViewModel extends ViewModel {
 
     public IncidentsViewViewModel() {
         listaMensajes = new MutableLiveData<>();
-
     }
 
     public LiveData<ArrayList<String>> getlistaMensajes() { return listaMensajes; }
@@ -38,46 +35,15 @@ public class IncidentsViewViewModel extends ViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot i : dataSnapshot.getChildren()) {
-
                     Message msg = i.getValue(Message.class);
                     incidentList.add(msg.getMensaje());
                 }
-
                 listaMensajes.postValue(incidentList);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
     }
-
-
-    //Metodo inventado para probar RecyclerView
-  /*  public ArrayList<String> getListadoRecycler(String msgID){
-        final ArrayList<String> incidentList = new ArrayList<>();
-
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
-        db.child("timeco incidents").child("mensajes").child(msgID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {/*
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    incidentList.add(postSnapshot.getValue(Message.class).getMensaje());
-
-                }
-                incidentList.add(dataSnapshot.getValue(Message.class).getMensaje());
-                Log.i("Fallo Thread", dataSnapshot.getValue(Message.class).getMensaje());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return incidentList;
-    }*/
 }
