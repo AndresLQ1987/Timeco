@@ -18,31 +18,32 @@ import java.util.ArrayList;
 
 public class IncidentsViewViewModel extends ViewModel {
 
-    private MutableLiveData<Message> mMsg;
-    private MutableLiveData<String> msgID;
+    private MutableLiveData<ArrayList<String>> listaMensajes;
 
     public IncidentsViewViewModel() {
-        mMsg = new MutableLiveData<>();
-        msgID = new MutableLiveData<>();
+        listaMensajes = new MutableLiveData<>();
 
     }
 
-    public LiveData<Message> getMsg() {
-        return mMsg;
-    }
+    public LiveData<ArrayList<String>> getlistaMensajes() { return listaMensajes; }
 
-    public LiveData<String> getMsgID() {
-        return msgID;
-    }
+    public void readlistaMensajes() {
 
-    public void readMsgID(String uid){
+        final ArrayList<String> incidentList = new ArrayList<>();
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-        db.child("timeco incidents").child("usuarios").child(uid).child("mensaje").addValueEventListener(new ValueEventListener() {
+        db.child("timeco incidents").child("mensajes").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                msgID.postValue(dataSnapshot.getValue(String.class));
+                for (DataSnapshot i : dataSnapshot.getChildren()) {
+
+                    Message msg = i.getValue(Message.class);
+                    incidentList.add(msg.getMensaje());
+                }
+
+                listaMensajes.postValue(incidentList);
             }
 
             @Override
@@ -53,26 +54,9 @@ public class IncidentsViewViewModel extends ViewModel {
 
     }
 
-    public void readMsg(String msgID){
-
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
-        db.child("timeco incidents").child("mensajes").child(msgID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mMsg.postValue(dataSnapshot.getValue(Message.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     //Metodo inventado para probar RecyclerView
-    public ArrayList<String> getListadoRecycler(String msgID){
+  /*  public ArrayList<String> getListadoRecycler(String msgID){
         final ArrayList<String> incidentList = new ArrayList<>();
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
@@ -83,7 +67,7 @@ public class IncidentsViewViewModel extends ViewModel {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     incidentList.add(postSnapshot.getValue(Message.class).getMensaje());
 
-                }*/
+                }
                 incidentList.add(dataSnapshot.getValue(Message.class).getMensaje());
                 Log.i("Fallo Thread", dataSnapshot.getValue(Message.class).getMensaje());
             }
@@ -95,5 +79,5 @@ public class IncidentsViewViewModel extends ViewModel {
         });
 
         return incidentList;
-    }
+    }*/
 }
