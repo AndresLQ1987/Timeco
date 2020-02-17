@@ -92,7 +92,8 @@ public class AccessData {
         userDao.deleteUser(user);
     }
 
-    public void insertInPostgres(){
+    public void insertInPostgres(final String id, final String username,final String pass,
+                                 final String fullname,final int rol){
 
         Thread hiloPostgres = new Thread() {
             @Override
@@ -104,18 +105,13 @@ public class AccessData {
 
                     Statement st = conn.createStatement();
 
-                    st.executeUpdate("Insert into usuario values('aadasda','test','prueba'" +
-                            "'usuario de prueba',2)");
+                    st.executeUpdate("Insert into usuario values('" + id +"','" + username + "','" +
+                            pass + "','" + fullname + "'," + rol + ")");
+                    conn.close();
                 } catch (SQLException sqle) {
                     sqle.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                } finally {
-                    try {
-                        conn.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         };

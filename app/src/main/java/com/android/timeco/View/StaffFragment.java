@@ -101,7 +101,6 @@ public class StaffFragment extends Fragment {
                         et_position.getText().toString(),
                         et_username.getText().toString(),
                         et_password.getText().toString())) {
-                    MainActivity.accessData.insertInPostgres();
                     Toast.makeText(getContext(), "Usuario añadido correctamente", Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(
                             R.id.MainActivity, new MenuFragment()).commit();

@@ -16,6 +16,8 @@ public class StaffViewModel extends ViewModel {
         try{
             User user = new User(username, password, "", 2);
             MainActivity.accessData.saveUser(user);
+            MainActivity.accessData.insertInPostgres(user.getId(),user.getUsername(),user.getPassword(),
+                    user.getFullname(),user.getRol());
 
             return true;
         }
