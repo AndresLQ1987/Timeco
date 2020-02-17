@@ -24,6 +24,8 @@ public class OptionsFragment extends Fragment {
      * Elements of Fragment
      */
     private Button bt_back;
+    private Button bt_check;
+    private Button bt_info;
 
     public OptionsFragment() {
         // Required empty public constructor
@@ -70,13 +72,15 @@ public class OptionsFragment extends Fragment {
         View ui_layout = inflater.inflate(R.layout.fragment_options, container, false);
 
         //TODO get information and sent to ViewModel
-        bt_back = ui_layout.findViewById(R.id.btn_options_back);
+        bt_back = ui_layout.findViewById(R.id.bt_back);
+        bt_check = ui_layout.findViewById(R.id.bt_check);
+        bt_info = ui_layout.findViewById(R.id.btn_info);
 
         bt_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new HomeFragment()).commit();
+                        R.id.MainActivity, new MenuFragment()).commit();
             }
         });
 
