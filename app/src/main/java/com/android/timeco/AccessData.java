@@ -96,11 +96,11 @@ public class AccessData {
 
         Thread hiloPostgres = new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 try {
                     Class.forName("org.postgresql.Driver");
 
-                    conn = DriverManager.getConnection(url,user,pwd);
+                    conn = DriverManager.getConnection(url, user, pwd);
 
                     Statement st = conn.createStatement();
 
@@ -117,14 +117,6 @@ public class AccessData {
                         e.printStackTrace();
                     }
                 }
-//                finally
-//                 {
-//                    try {
-//                        conn.close();
-//                    } catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
             }
         };
         hiloPostgres.start();
