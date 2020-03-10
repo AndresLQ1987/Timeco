@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.timeco.MainActivity;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.StaffViewModel;
 
@@ -91,7 +90,7 @@ public class StaffFragment extends Fragment {
         et_username = ui_layout.findViewById(R.id.txt_Staff_Username);
         et_password = ui_layout.findViewById(R.id.txt_Staff_Password);
         //TODO Rename id button to btn_confirm
-        bt_confirm = ui_layout.findViewById(R.id.bt_search);
+        bt_confirm = ui_layout.findViewById(R.id.bt_send);
         bt_back = ui_layout.findViewById(R.id.bt_back);
         btn_info = ui_layout.findViewById(R.id.btn_info);
 

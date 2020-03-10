@@ -141,12 +141,12 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/bt_search"
+            android:id="@+id/bt_send"
             android:layout_width="79dp"
             android:layout_height="49dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/ic_buscar"
+            android:background="@drawable/ic_aceptar"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_info"
