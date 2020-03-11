@@ -1,5 +1,6 @@
 package com.android.timeco.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -18,13 +19,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.DirectoryViewModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-public class DirectoryFragment extends Fragment {
+import static android.app.Activity.RESULT_OK;
+
+public class DirectoryFragment extends Fragment{
 
     private DirectoryViewModel directoryViewModel;
+    private StorageReference mStorage;
     ImageView imagen;
 
 
@@ -67,7 +75,7 @@ public class DirectoryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (nombre.getText().toString() != null && mail.getText().toString() != null) {
-                    directoryViewModel.WriteOnFirebase(nombre.getText().toString());
+                    directoryViewModel.WriteOnFirebase(nombre.getText().toString(), mail.getText().toString());
                 }
             }
         });
@@ -94,13 +102,14 @@ public class DirectoryFragment extends Fragment {
 
         Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
         startActivityForResult(intent, 10);
 
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         Bitmap bitmap = null;
@@ -112,8 +121,16 @@ public class DirectoryFragment extends Fragment {
 
             try {
 
-                bitmap = MediaStore.Images.Media
-                        .getBitmap(getContentResolver(), uri);
+               /* bitmap = MediaStore.Images.Media
+                        .getBitmap(getContentResolver(), uri);*/
+
+                StorageReference filePath = mStorage.child("fotos").child(uri.getLastPathSegment());
+                filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //Toast.makeText(this, "Foto subida correctamente", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
             }catch (Exception e){
@@ -131,4 +148,5 @@ public class DirectoryFragment extends Fragment {
 
 
     }
+
 }

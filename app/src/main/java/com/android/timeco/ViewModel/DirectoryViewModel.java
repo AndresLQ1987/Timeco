@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.timeco.Model.Employes;
 import com.android.timeco.Model.Message;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,14 +21,13 @@ public class DirectoryViewModel extends ViewModel {
         return mText;
     }
 
-    public void WriteOnFirebase(String msg){
+    public void WriteOnFirebase(String nombre, String mail){
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference msg_reference = db.child("timeco directory").child("empleados").push();
-        msg_reference.setValue(new Message("usuario inventado",
-                "pVBEOgINbVOGdkne7Sjhg3ycW6h2", msg));
+        DatabaseReference employe_reference = db.child("timeco directory").child("empleados").child("datos").push();
+        employe_reference.setValue(new Employes(nombre, mail));
         db.child("timeco directory").child("empleados").child("pVBEOgINbVOGdkne7Sjhg3ycW6h2").child("empleados")
-                .setValue(msg_reference.getKey());
+                .child("datos").setValue(employe_reference.getKey());
 
     }
 }
