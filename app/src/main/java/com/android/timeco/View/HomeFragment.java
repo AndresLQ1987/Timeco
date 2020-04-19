@@ -1,5 +1,7 @@
 package com.android.timeco.View;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.HomeViewModel;
@@ -27,10 +30,13 @@ public class HomeFragment extends Fragment {
     /**
      * Elements of Fragment
      */
+    private boolean musicOnOff = true;
 
     private Button btnBack;
     private Button btnReg;
     private Button btnInfo;
+    private ImageButton ibtnMusica;
+    private MediaPlayer mediaPlayer;
 
     private EditText et_start_hours;
     private EditText et_start_minuts;
@@ -84,6 +90,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View ui_layout = inflater.inflate(R.layout.fragment_home, container, false);
 
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.canciontest);
+        mediaPlayer.start();
+
         et_start_hours = ui_layout.findViewById(R.id.etxt_start_h);
         et_start_minuts = ui_layout.findViewById(R.id.etxt_start_m);
         et_end_hours = ui_layout.findViewById(R.id.etxt_end_h);
@@ -94,6 +103,7 @@ public class HomeFragment extends Fragment {
         btnBack = ui_layout.findViewById(R.id.bt_back);
         btnReg = ui_layout.findViewById(R.id.bt_check);
         btnInfo = ui_layout.findViewById(R.id.btn_info);
+        ibtnMusica = ui_layout.findViewById(R.id.ibtn_musica);
 
 
         //ActionListener of button Worklogs to go work logs fragment
@@ -117,6 +127,21 @@ public class HomeFragment extends Fragment {
                 resetInputs();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
                         R.id.MainActivity, new MenuFragment()).commit();
+            }
+        });
+
+        ibtnMusica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (musicOnOff) {
+                    mediaPlayer.pause();
+                    ibtnMusica.setBackgroundResource(R.drawable.play);
+                    musicOnOff = false;
+                } else {
+                    mediaPlayer.start();
+                    ibtnMusica.setBackgroundResource(R.drawable.mute);
+                    musicOnOff = true;
+                }
             }
         });
 

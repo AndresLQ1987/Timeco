@@ -1,10 +1,8 @@
 package com.android.timeco.ViewModel;
 
 import androidx.lifecycle.ViewModel;
-
 import com.android.timeco.MainActivity;
 import com.android.timeco.Model.Worklog;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -46,4 +44,5 @@ public class HomeViewModel extends ViewModel {
 
         return h + m / 60;
     }
+
 }

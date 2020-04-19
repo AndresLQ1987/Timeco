@@ -269,7 +269,7 @@
         android:id="@+id/ibtn_musica"
         android:layout_width="41dp"
         android:layout_height="36dp"
-        android:src="@android:drawable/ic_lock_silent_mode"
+        android:background="@drawable/mute"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.964"
