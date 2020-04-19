@@ -3,6 +3,7 @@ package com.android.timeco.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -24,8 +25,14 @@ import android.widget.Toast;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.DirectoryViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -33,7 +40,10 @@ public class DirectoryFragment extends Fragment{
 
     private DirectoryViewModel directoryViewModel;
     private StorageReference mStorage;
+    private DatabaseReference mRootReference;
+    private static final int GALLERY_INTENT = 1;
     ImageView imagen;
+    EditText NombreeditText, MaileditText;
 
 
     public static DirectoryFragment newInstance() {
@@ -43,8 +53,12 @@ public class DirectoryFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        directoryViewModel = ViewModelProviders.of(this).get(DirectoryViewModel.class);
         View root = inflater.inflate(R.layout.directory_fragment, container, false);
+
+        directoryViewModel = ViewModelProviders.of(this).get(DirectoryViewModel.class);
+
+        mStorage = FirebaseStorage.getInstance().getReference();
+        mRootReference = FirebaseDatabase.getInstance().getReference();
 
         final EditText nombre = root.findViewById(R.id.NombreeditText);
         final EditText mail = root.findViewById(R.id.MaileditText);
@@ -62,20 +76,27 @@ public class DirectoryFragment extends Fragment{
             }
         });
 
-        camera.setOnClickListener(new View.OnClickListener() {
+       /* camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 take_photo();
 
             }
-        });
+        });*/
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (nombre.getText().toString() != null && mail.getText().toString() != null) {
-                    directoryViewModel.WriteOnFirebase(nombre.getText().toString(), mail.getText().toString());
+                    //directoryViewModel.WriteOnFirebase(nombre.getText().toString(), mail.getText().toString());
+                    String nombre = NombreeditText.getText().toString();
+                    String mail = MaileditText.getText().toString();
+
+                    cargarDatosFirebase(nombre, mail);
+
+                } else {
+                    Toast.makeText(getContext(), "Campo nombre y/o mail sin rellenar", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -91,19 +112,26 @@ public class DirectoryFragment extends Fragment{
 
     }
 
-    private void take_photo() {
+    private void cargarDatosFirebase(String nombre, String mail) {
+        Map<String, Object> datos  = new HashMap<>();
+        datos.put("nombre", nombre);
+        datos.put("mail", mail);
+
+        mRootReference.child("Empleados").push().setValue(datos);
+    }
+
+    /*private void take_photo() {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 20);
 
-    }
+    }*/
 
     private void cargar_imagen_galeria() {
 
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        startActivityForResult(intent, 10);
+        startActivityForResult(intent, GALLERY_INTENT);
 
 
     }
@@ -114,7 +142,7 @@ public class DirectoryFragment extends Fragment{
 
         Bitmap bitmap = null;
 
-        if(requestCode == 10 && resultCode == RESULT_OK){
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
 
             Uri uri;
             uri = data.getData();
@@ -128,7 +156,7 @@ public class DirectoryFragment extends Fragment{
                 filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        //Toast.makeText(this, "Foto subida correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Foto subida correctamente", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -136,11 +164,11 @@ public class DirectoryFragment extends Fragment{
             }catch (Exception e){
                 e.printStackTrace();
             }
-        } else if (requestCode == 20 && resultCode == RESULT_OK){
+        }/* else if (requestCode == 20 && resultCode == RESULT_OK){
 
             bitmap = (Bitmap) data.getExtras().get("data");
 
-        }
+        }*/
 
         if(bitmap != null){
             imagen.setImageBitmap(bitmap);

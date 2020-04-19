@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "312770955105-5l8b14sj3tlpknh70esp87967jbvf30c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.timeco",
+            "certificate_hash": "d1e239b1749ceccdf27cb642dca3909876389f05"
+          }
+        },
+        {
+          "client_id": "312770955105-6b4mqho60fh2qplub42v0b9hbmmu2r01.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.timeco",
+            "certificate_hash": "13d0943304f3acaba48f83734a55f72080a2038c"
+          }
+        },
+        {
           "client_id": "312770955105-doua8gbm1cqb9ql7kshjjiivami97asq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

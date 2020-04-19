@@ -74,7 +74,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(
-                        R.id.MainActivity, new StaffFragment()).commit();
+                        R.id.MainActivity, new StaffSelectionFragment()).commit();
             }
         });
 
