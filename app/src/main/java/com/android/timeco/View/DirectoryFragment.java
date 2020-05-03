@@ -1,9 +1,7 @@
 package com.android.timeco.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -25,25 +23,17 @@ import android.widget.Toast;
 import com.android.timeco.R;
 import com.android.timeco.ViewModel.DirectoryViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
 public class DirectoryFragment extends Fragment{
 
-    private DirectoryViewModel directoryViewModel;
+    /*private DirectoryViewModel directoryViewModel;
     private StorageReference mStorage;
-    private DatabaseReference mRootReference;
     private static final int GALLERY_INTENT = 1;
-    ImageView imagen;
-    EditText NombreeditText, MaileditText;
 
 
     public static DirectoryFragment newInstance() {
@@ -58,14 +48,13 @@ public class DirectoryFragment extends Fragment{
         directoryViewModel = ViewModelProviders.of(this).get(DirectoryViewModel.class);
 
         mStorage = FirebaseStorage.getInstance().getReference();
-        mRootReference = FirebaseDatabase.getInstance().getReference();
 
         final EditText nombre = root.findViewById(R.id.NombreeditText);
         final EditText mail = root.findViewById(R.id.MaileditText);
         final ImageView imagen = root.findViewById(R.id.FotoimageView);
         final Button galeria = root.findViewById(R.id.Gallerybutton);
         final Button camera = root.findViewById(R.id.Camerabutton);
-        final Button enviar = root.findViewById(R.id.bt_send);
+        final Button enviar = root.findViewById(R.id.bt_add);
         final Button atras = root.findViewById(R.id.bt_back);
 
         galeria.setOnClickListener(new View.OnClickListener() {
@@ -73,31 +62,33 @@ public class DirectoryFragment extends Fragment{
             public void onClick(View v) {
 
                 cargar_imagen_galeria();
+
             }
         });
 
-       /* camera.setOnClickListener(new View.OnClickListener() {
+       camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 take_photo();
 
             }
-        });*/
+        });
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (nombre.getText().toString() != null && mail.getText().toString() != null) {
                     //directoryViewModel.WriteOnFirebase(nombre.getText().toString(), mail.getText().toString());
-                    String nombre = NombreeditText.getText().toString();
-                    String mail = MaileditText.getText().toString();
 
-                    cargarDatosFirebase(nombre, mail);
 
                 } else {
                     Toast.makeText(getContext(), "Campo nombre y/o mail sin rellenar", Toast.LENGTH_LONG).show();
+
                 }
+                getActivity().getSupportFragmentManager().beginTransaction().replace(
+                        R.id.MainActivity, new PhotoFragment()).commit();
+
             }
         });
         atras.setOnClickListener(new View.OnClickListener() {
@@ -112,20 +103,12 @@ public class DirectoryFragment extends Fragment{
 
     }
 
-    private void cargarDatosFirebase(String nombre, String mail) {
-        Map<String, Object> datos  = new HashMap<>();
-        datos.put("nombre", nombre);
-        datos.put("mail", mail);
-
-        mRootReference.child("Empleados").push().setValue(datos);
-    }
-
-    /*private void take_photo() {
+   private void take_photo() {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 20);
 
-    }*/
+    }
 
     private void cargar_imagen_galeria() {
 
@@ -135,6 +118,7 @@ public class DirectoryFragment extends Fragment{
 
 
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -147,34 +131,44 @@ public class DirectoryFragment extends Fragment{
             Uri uri;
             uri = data.getData();
 
+
             try {
 
-               /* bitmap = MediaStore.Images.Media
+              /*bitmap = MediaStore.Images.Media
                         .getBitmap(getContentResolver(), uri);*/
 
-                StorageReference filePath = mStorage.child("fotos").child(uri.getLastPathSegment());
+               /* StorageReference filePath = mStorage.child("fotos").child(uri.getLastPathSegment());
                 filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getContext(), "Foto subida correctamente", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
+
+                /*filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                       StorageReference descargar = taskSnapshot.getStorage();
+
+                       Glide.with(DirectoryFragment.this)
+                                .load(descargar)
+                                .fitCenter()
+                                .centerCrop()
+                                .into(imagen);
+                    }
+                });*/
 
 
-            }catch (Exception e){
+           /* }catch (Exception e){
                 e.printStackTrace();
             }
-        }/* else if (requestCode == 20 && resultCode == RESULT_OK){
+        } else if (requestCode == 20 && resultCode == RESULT_OK){
 
             bitmap = (Bitmap) data.getExtras().get("data");
 
-        }*/
-
-        if(bitmap != null){
-            imagen.setImageBitmap(bitmap);
         }
 
-
-    }
+    }*/
 
 }

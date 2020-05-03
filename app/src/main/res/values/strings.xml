@@ -47,6 +47,15 @@
     <string name="tv_title">CARGAR UNA WEB</string>
     <string name="button_cargar">CARGAR</string>
 
+    <!-- Spinner -->
+
+    <string-array name="departamentos_array">
+        <item>Comercial</item>
+        <item>Administración</item>
+        <item>RRHH</item>
+        <item>Técnicos</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

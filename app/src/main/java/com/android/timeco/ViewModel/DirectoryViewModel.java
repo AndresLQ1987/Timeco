@@ -17,43 +17,23 @@ import java.util.ArrayList;
 
 public class DirectoryViewModel extends ViewModel {
 
-   /* private MutableLiveData<ArrayList<String>> mText;
+    /*private MutableLiveData<String> mText;
 
     public DirectoryViewModel() {
         mText = new MutableLiveData<>();
     }
 
-    public LiveData<ArrayList<String>> getText() {
+    public LiveData<String> getText() {
         return mText;
     }
 
-    public void WriteOnFirebase(String nombre, String mail){
-
-        final ArrayList<String> datos = new ArrayList<>();
+    public void WriteOnFirebase(String position, String nombre, String mail){
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-
-        db.child("timeco directory").child("empleados").addValueEventListener(new ValueEventListener() {
-
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot i : dataSnapshot.getChildren()) {
-                    Employes data = i.getValue(Employes.class);
-                    datos.add(data.getNombre());
-                }
-                mText.postValue(datos);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         DatabaseReference employe_reference = db.child("timeco directory").child("empleados").child("datos").push();
-        employe_reference.setValue(new Employes(nombre, mail));
+        employe_reference.setValue(new Employes(position, nombre, mail));
         db.child("timeco directory").child("empleados").child("pVBEOgINbVOGdkne7Sjhg3ycW6h2").child("empleados")
                 .child("datos").setValue(employe_reference.getKey());
 
-    }*/
+            }*/
 }

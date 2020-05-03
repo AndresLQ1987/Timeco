@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
     tools:context=".View.StaffFragment">
 
     <Spinner
@@ -30,7 +31,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginBottom="14dp"
         android:ems="10"
-        android:hint="@string/txt_Staff_Name"
+        android:hint="Nombre completo"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/txt_Staff_Surname"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +49,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginBottom="14dp"
         android:ems="10"
-        android:hint="@string/txt_Staff_Surname"
+        android:hint="e-mail"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/roleSelect"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,10 +112,48 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/txt_Staff_Username"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roleSelect" />
 
+    <TextView
+        android:id="@+id/ImagentextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Cargar imagen"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Staff_Password" />
+
+    <Button
+        android:id="@+id/Camerabutton"
+        android:layout_width="69dp"
+        android:layout_height="62dp"
+        android:background="@drawable/ic_camera"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Gallerybutton"
+        app:layout_constraintTop_toBottomOf="@+id/ImagentextView" />
+
+    <Button
+        android:id="@+id/Gallerybutton"
+        android:layout_width="74dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/ic_photo_library"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/Camerabutton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImagentextView"
+        app:layout_constraintVertical_bias="0.0" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="414dp"
         android:layout_height="59dp"
         android:background="@drawable/border_top"
@@ -141,7 +180,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/bt_send"
+            android:id="@+id/bt_add"
             android:layout_width="79dp"
             android:layout_height="49dp"
             android:layout_marginTop="5dp"

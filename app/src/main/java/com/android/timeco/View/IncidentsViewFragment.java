@@ -46,7 +46,7 @@ public class IncidentsViewFragment extends Fragment {
 
         incidentsViewViewModel.readlistaMensajes(); // ID del Usuario para leer sus mensajes
 
-        incidentsViewViewModel.getlistaMensajes().observe(this, new Observer<ArrayList<String>>() {
+        incidentsViewViewModel.getlistaMensajes().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> strings) {
                 mAdapter = new IncidentAdapter(strings);
@@ -77,7 +77,7 @@ public class IncidentsViewFragment extends Fragment {
         public IncidentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            TextIncidents = (TextView) itemView.findViewById(R.id.tv_incidents);
+            TextIncidents = (TextView) itemView.findViewById(R.id.tv_nombre);
         }
     }
 

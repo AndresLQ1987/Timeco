@@ -16,6 +16,11 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.android.timeco.View.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" />
+    <fragment
         android:id="@+id/staffFragment"
         android:name="com.android.timeco.View.StaffFragment"
         android:label="fragment_staff"
@@ -30,4 +35,24 @@
         android:name="com.android.timeco.View.WorklogsFragment"
         android:label="fragment_worklogs"
         tools:layout="@layout/fragment_worklogs" />
+    <fragment
+        android:id="@+id/writeIncidentsFragment"
+        android:name="com.android.timeco.View.WriteIncidentFragment"
+        android:label="fragment_write_incident"
+        tools:layout="@layout/fragment_write_incident" />
+    <fragment
+        android:id="@+id/viewIncidentsFragment"
+        android:name="com.android.timeco.View.IncidentsViewFragment"
+        android:label="incidents_view_fragment"
+        tools:layout="@layout/incidents_view_fragment" />
+    <fragment
+        android:id="@+id/staffSelectionFragment"
+        android:name="com.android.timeco.View.StaffSelectionFragment"
+        android:label="fragment_staff_selection"
+        tools:layout="@layout/fragment_staff_selection" />
+    <fragment
+        android:id="@+id/detalleContactoFragment"
+        android:name="com.android.timeco.View.DetalleContactoFragment"
+        android:label="fragment_detalle_contacto"
+        tools:layout="@layout/fragment_detalle_contacto" />
 </navigation>

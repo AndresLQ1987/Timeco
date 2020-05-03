@@ -1,4 +1,4 @@
-package com.android.timeco;
+package com.android.timeco.Data;
 
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
